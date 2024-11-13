@@ -63,7 +63,7 @@ cd coursework
 
 If you are using a Unix-based system (Linux, macOS), you may need to use `sudo` to start the server:
 
-```bash
+```wsl
 sudo node server.js
 ```
 
@@ -90,6 +90,14 @@ After the server starts, verify that it’s running by checking the console outp
    ```
 
    If prompted to run on a different port (since the server uses port 3000), press `Y` to confirm. React will start the frontend server on an available port and open a browser window with the UI.
+
+### For Unix-based Systems
+
+If you are using a Unix-based system (Linux, macOS), you may need to use `sudo` to start the frontend:
+
+```wsl
+sudo npm start
+```
 
 Enjoy working with the design interface!
 
