@@ -27,7 +27,7 @@ function HomePage()
           This portal was created as a project for course work. Here you can manage books, readers, positions and payments.
           The portal is designed to facilitate the library's work and improve the reader experience.
         </p>
-        <p>Developer: [//TODO: ebanyt suda imya ]</p>
+        <p>Developer: [zhbforum, etc]</p>
       </div>
     </div>
   );

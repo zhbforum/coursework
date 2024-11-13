@@ -6,8 +6,7 @@ function Footer()
   return (
     <footer className="footer">
       <div className="footer-logo">Library Management</div>
-      <p>//TODO: Fixanyt` problemi s headerom v books, authors, readers, loans, payments, genres</p>
-      <p>&copy; {new Date().getFullYear()} Library Management. Разработано: :</p>
+      <p>&copy; {new Date().getFullYear()} Library Management. Developer: zhbforum :</p>
     </footer>
   );
 }
