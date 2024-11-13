@@ -14,8 +14,6 @@ React library which is involved in the frontend part. Also the axios library for
   <img src="photos/image_react_no_background_v2.png" alt="Node.js Logo" width="150" height="100"/>
 </p>
 
-![Help](https://prnt.sc/Ce3EEtptlWuS)
-
 # Coursework Project Setup
 
 This guide will walk you through the steps to set up and run the project. Follow these instructions to get started with the backend server and the frontend interface.
