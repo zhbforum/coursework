@@ -4,7 +4,8 @@
 
 The project uses MySQL for the database, 
 Node.js for the backend logic. 
-Express.js for running an API that simplifies working with routes, requests and responses, a framework for node.js. React library which is involved in the frontend part. Also the axios library for react, which performs http requests for api
+Express.js for running an API that simplifies working with routes, requests and responses, a framework for node.js. 
+React library which is involved in the frontend part. Also the axios library for react, which performs http requests for api
 
 
 <p align="center">
