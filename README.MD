@@ -9,9 +9,9 @@ React library which is involved in the frontend part. Also the axios library for
 
 
 <p align="center">
-  <img src="photos/90px-MySQL_logo.svg.png" alt="MySQL Logo" width="150" height="100"/>
-  <img src="photos/image_no_background.png" alt="Node.js Logo" width="150" height="100"/>
-  <img src="photos/image_react_no_background_v2.png" alt="Node.js Logo" width="150" height="100"/>
+  <img src="rep_photos/90px-MySQL_logo.svg.png" alt="MySQL Logo" width="150" height="100"/>
+  <img src="rep_photos/image_no_background.png" alt="Node.js Logo" width="150" height="100"/>
+  <img src="rep_photos/image_react_no_background_v2.png" alt="Node.js Logo" width="150" height="100"/>
 </p>
 
 # Coursework Project Setup
