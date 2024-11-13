@@ -9,5 +9,5 @@ Express.js for running an API that simplifies working with routes, requests and 
 
 <p align="center">
   <img src="photos/90px-MySQL_logo.svg.png" alt="MySQL Logo" width="120" height="70"/>
-  <img src="photos/image_no_background.png" alt="Node.js Logo" width="120" height="80"/>
+  <img src="photos/image_no_background.png" alt="Node.js Logo" width="145" height="80"/>
 </p>
