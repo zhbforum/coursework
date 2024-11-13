@@ -1,0 +1,33 @@
+.footer 
+{
+    background: linear-gradient(90deg, #182848, #4b6cb7); 
+    color: #ccc;
+    padding: 15px 30px;
+    text-align: center;
+    font-size: 1em;
+    font-family: 'Roboto', sans-serif;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.3);
+}
+
+.footer-logo 
+{
+    font-weight: 700;
+    font-size: 1.2em;
+    color: #f0f0f5;
+    transition: color 0.3s ease;
+}
+  
+.footer-logo:hover 
+{
+    color: #ffdd57; 
+}
+  
+.footer p 
+{
+    margin: 0;
+    color: #dcdcdc;
+}
+  

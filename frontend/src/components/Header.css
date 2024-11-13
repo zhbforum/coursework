@@ -1,0 +1,67 @@
+.header 
+{
+    background: linear-gradient(90deg, #4b6cb7, #182848); 
+    color: #fff;
+    padding: 15px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    font-family: 'Roboto', sans-serif; 
+}
+  
+.header-logo 
+{
+    font-size: 1.8em; 
+    font-weight: 700;
+    color: #ffffff;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+  
+.header-logo:hover 
+{
+    color: #dcdcdc; 
+}
+  
+.header nav ul 
+{
+    display: flex;
+    gap: 20px;
+    list-style-type: none;
+}
+  
+.header nav ul li a 
+{
+    color: #f0f0f5;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 1.1em; 
+    transition: color 0.3s ease, transform 0.3s ease; 
+}
+  
+.header nav ul li a:hover 
+{
+    color: #ffdd57; 
+    transform: scale(1.1); 
+}
+
+.search-icon 
+{
+    display: flex;
+    align-items: center;
+}
+
+  .search-icon img 
+{
+    width: 24px;
+    height: 24px;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+  
+  .search-icon img:hover 
+{
+    transform: scale(1.1);
+}
+  
