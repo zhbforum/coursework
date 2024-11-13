@@ -11,5 +11,5 @@ React library which is involved in the frontend part. Also the axios library for
 <p align="center">
   <img src="photos/90px-MySQL_logo.svg.png" alt="MySQL Logo" width="120" height="70"/>
   <img src="photos/image_no_background.png" alt="Node.js Logo" width="145" height="80"/>
-  <img src="photos/image_react_no_background_v2.png" alt="Node.js Logo" width="145" height="100"/>
+  <img src="photos/image_react_no_background_v2.png" alt="Node.js Logo" width="145" height="80"/>
 </p>
