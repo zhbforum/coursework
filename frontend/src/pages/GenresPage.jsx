@@ -25,9 +25,9 @@ function GenresPage()
       <ul>
         {genres.map(genre => 
         (
-          <li key={genre.genre_id}>
+          <li key={genre.id}>
             {genre.genre_name}
-            <Link to={`/genres/editing/${genre.genre_id}`}>
+            <Link to={`/genres/editing/${genre.id}`}>
               <button>Edit</button>
             </Link>
           </li>

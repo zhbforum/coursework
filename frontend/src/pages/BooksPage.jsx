@@ -22,9 +22,9 @@ function BooksPage()
       <ul>
         {books.map(book => 
         (
-          <li key={book.book_id}>
+          <li key={book.id}>
             {book.title} - Available copies: {book.available_copies}
-            <Link to={`/books/editing/${book.book_id}`}>
+            <Link to={`/books/editing/${book.id}`}>
               <button>Editing</button>
             </Link>
           </li>

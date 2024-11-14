@@ -24,9 +24,9 @@ function LoansPage()
       <ul>
         {loans.map(loan => 
         (
-          <li key={loan.loan_id}>
+          <li key={loan.id}>
             Reader ID: {loan.reader_id} - Book ID: {loan.book_id} - date of issue: {loan.loan_date}
-            <Link to={`/loans/editing/${loan.loan_id}`}>
+            <Link to={`/loans/editing/${loan.id}`}>
               <button>Edit</button>
             </Link>
           </li>

@@ -4,11 +4,12 @@ const booksController = require('../controllers/booksController');
 const { searchBooks } = require('../controllers/booksController');
 const { searchWithFilters } = require('../controllers/booksController');
 
+router.get('/search-with-filters', searchWithFilters);
+router.get('/search', searchBooks);
+router.get('/:bookId', booksController.getBookById);
 
 router.get('/', booksController.getAllBooks);
-router.get('/search', searchBooks);
-router.get('/search-with-filters', searchWithFilters);
-
+router.put('/:bookId', booksController.updateBook);
 router.post('/', booksController.addBook);
 
 module.exports = router;

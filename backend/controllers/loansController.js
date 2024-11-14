@@ -36,4 +36,51 @@ const addLoan = (req, res) =>
   });
 };
 
-module.exports = { getAllLoans, addLoan };
+const updateLoan = (req, res) => 
+{
+  const loanId = req.params.loanId;
+  const { reader_id, book_id, loan_date } = req.body;
+  const sql = 'UPDATE loans SET reader_id = ?, book_id = ?, loan_date = ? WHERE id = ?';
+  db.query(sql, [reader_id, book_id, loan_date, loanId], (err, result) => 
+  {
+    if (err) 
+    {
+      console.error('Request execution error:', err.message);
+      res.status(500).json({ error: 'Server error', details: err.message });
+    } 
+    else if (result.affectedRows === 0) 
+    {
+      res.status(404).json({ error: 'Loan not found' });
+    } 
+    else 
+    {
+      res.json({ message: 'Loan successfully updated' });
+    }
+  });
+};
+
+const getLoanById = (req, res) => 
+{
+  const loanId = req.params.loanId;
+  const sql = 'SELECT * FROM loans WHERE id = ?';
+  db.query(sql, [loanId], (err, results) => 
+  {
+    if (err) 
+    {
+      console.error('Request execution error:', err.message);
+      res.status(500).json({ error: 'Server error', details: err.message });
+    } 
+    else if (results.length === 0) 
+    {
+      res.status(404).json({ error: 'Loan not found' });
+    } 
+    else 
+    {
+      res.json(results[0]);
+    }
+  });
+  console.log('Executing query:', sql, [loanId]);
+};
+
+
+module.exports = { getAllLoans, updateLoan, getLoanById, addLoan };

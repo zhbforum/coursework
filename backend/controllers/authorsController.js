@@ -15,12 +15,13 @@ const getAllAuthors = (req, res) =>
       res.json(results);
     }
   });
+  
 };
 
 const getAuthorById = (req, res) => 
 {
   const authorId = req.params.authorId;
-  const sql = 'SELECT * FROM authors WHERE author_id = ?';
+  const sql = 'SELECT * FROM authors WHERE id = ?';
   db.query(sql, [authorId], (err, results) => 
   {
     if (err) 
@@ -37,6 +38,7 @@ const getAuthorById = (req, res) =>
       res.json(results[0]);
     }
   });
+  console.log('Executing query:', sql, [authorId]);
 };
 
 const addAuthor = (req, res) => 
@@ -61,7 +63,7 @@ const updateAuthor = (req, res) =>
 {
   const authorId = req.params.authorId;
   const { name, bio } = req.body;
-  const sql = 'UPDATE authors SET name = ?, bio = ? WHERE author_id = ?';
+  const sql = 'UPDATE authors SET name = ?, bio = ? WHERE id = ?';
   db.query(sql, [name, bio, authorId], (err, result) => 
   {
     if (err) 

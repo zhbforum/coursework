@@ -29,10 +29,12 @@ function App()
         <main className="container">
           <Routes>
             <Route path="/" element={<HomePage />} />
+            
             <Route path="/books" element={<BooksPage />} />
             <Route path="/books/editing" element={<BooksEditingPage />} />
             <Route path="/books/editing/:bookId" element={<BooksEditingPage />} />
             <Route path="/books/search" element={<SearchBooks />} />
+
             <Route path="/readers" element={<ReadersPage />} />
             <Route path="/readers/editing" element={<ReadersEditingPage />} />
             <Route path="/readers/editing/:readerId" element={<ReadersEditingPage />} />

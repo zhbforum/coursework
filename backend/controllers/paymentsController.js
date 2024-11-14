@@ -20,7 +20,7 @@ const getAllPayments = (req, res) =>
 const getPaymentById = (req, res) => 
 {
   const paymentId = req.params.paymentId;
-  const sql = 'SELECT * FROM payments WHERE payment_id = ?';
+  const sql = 'SELECT * FROM payments WHERE id = ?';
   db.query(sql, [paymentId], (err, results) => 
     {
     if (err) 
@@ -59,7 +59,7 @@ const updatePayment = (req, res) =>
 {
   const paymentId = req.params.paymentId;
   const { reader_id, amount, payment_date } = req.body;
-  const sql = 'UPDATE payments SET reader_id = ?, amount = ?, payment_date = ? WHERE payment_id = ?';
+  const sql = 'UPDATE payments SET reader_id = ?, amount = ?, payment_date = ? WHERE id = ?';
   db.query(sql, [reader_id, amount, payment_date, paymentId], (err, result) => 
     {
     if (err) 

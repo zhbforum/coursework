@@ -23,9 +23,9 @@ function PaymentsPage() {
       <h1>List of payments</h1>
       <ul>
         {payments.map(payment => (
-          <li key={payment.payment_id}>
+          <li key={payment.id}>
             Reader ID: {payment.reader_id} - Amount: {payment.amount}
-            <Link to={`/payments/editing/${payment.payment_id}`}>
+            <Link to={`/payments/editing/${payment.id}`}>
               <button>Edit</button>
             </Link>
           </li>

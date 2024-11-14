@@ -20,7 +20,7 @@ const getAllGenres = (req, res) =>
 const getGenreById = (req, res) => 
 {
   const genreId = req.params.genreId;
-  const sql = 'SELECT * FROM genres WHERE genre_id = ?';
+  const sql = 'SELECT * FROM genres WHERE id = ?';
   db.query(sql, [genreId], (err, results) => 
   {
     if (err) 
@@ -61,7 +61,7 @@ const updateGenre = (req, res) =>
 {
   const genreId = req.params.genreId;
   const { genre_name } = req.body;
-  const sql = 'UPDATE genres SET genre_name = ? WHERE genre_id = ?';
+  const sql = 'UPDATE genres SET genre_name = ? WHERE id = ?';
   db.query(sql, [genre_name, genreId], (err, result) => 
     {
     if (err) 

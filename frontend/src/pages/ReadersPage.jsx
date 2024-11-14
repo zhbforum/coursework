@@ -23,9 +23,9 @@ function ReadersPage() {
       <h1>List of readers</h1>
       <ul>
         {readers.map(reader => (
-          <li key={reader.reader_id}>
+          <li key={reader.id}>
             {reader.name} - Email: {reader.email} - Телефон: {reader.phone}
-            <Link to={`/readers/editing/${reader.reader_id}`}>
+            <Link to={`/readers/editing/${reader.id}`}>
               <button>Edit</button>
             </Link>
           </li>

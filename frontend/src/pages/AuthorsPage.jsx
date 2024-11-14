@@ -25,9 +25,9 @@ function AuthorsPage()
       <ul>
         {authors.map(author => 
         (
-          <li key={author.author_id}>
+          <li key={author.id}>
             {author.name}
-            <Link to={`/authors/editing/${author.author_id}`}>
+            <Link to={`/authors/editing/${author.id}`}>
               <button>Editing</button>
             </Link>
           </li>
