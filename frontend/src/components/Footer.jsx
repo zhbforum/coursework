@@ -6,7 +6,7 @@ function Footer()
   return (
     <footer className="footer">
       <div className="footer-logo">Library Management</div>
-      <p>&copy; {new Date().getFullYear()} Library Management. Developer: piskogriz :</p>
+      <p>&copy; {new Date().getFullYear()} Library Management. Developers: zhbforum, killursxlf:</p>
     </footer>
   );
 }
