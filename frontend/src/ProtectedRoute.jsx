@@ -10,7 +10,7 @@ function ProtectedRoute({ children, allowedRole }) {
     }
 
     try {
-        const decoded = jwtDecode(token); // Используем именованный импорт
+        const decoded = jwtDecode(token); 
         if (decoded.role !== allowedRole) {
             return <Navigate to="/" />;
         }

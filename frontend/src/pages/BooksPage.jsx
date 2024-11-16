@@ -17,7 +17,7 @@ function BooksPage()
   }, []);
 
   return (
-    <div className="container">
+    <div>
       <h1>List of books</h1>
       <ul>
         {books.map(book => 

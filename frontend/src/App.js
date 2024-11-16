@@ -19,11 +19,11 @@ import SearchBooks from './pages/SearchBooksPage';
 import AdvancedSearch from './components/AdvancedSearch'; 
 import ProtectedRoute from './ProtectedRoute';
 import AdminDashboard from './pages/AdminDashboard';
+import LoginPage from './pages/LoginPage'; // Импортируйте LoginPage
 
 import './App.css';
 
-function App() 
-{
+function App() {
   return (
     <Router>
       <div className="page">
@@ -32,10 +32,12 @@ function App()
           <Routes>
             <Route path="/" element={<HomePage />} />
             
+            <Route path="/login" element={<LoginPage />} /> {/* Маршрут для страницы логина */}
+            
             <Route path="/books" element={<BooksPage />} />
             <Route path="/books/search" element={<SearchBooks />} />
 
-            {/* Protected routes for editing */}
+            {/* Защищенные маршруты для редактирования */}
             <Route path="/books/editing" element={
               <ProtectedRoute allowedRole="admin">
                 <BooksEditingPage />

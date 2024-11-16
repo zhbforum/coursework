@@ -63,7 +63,7 @@ function AuthorsEditingPage()
   };
 
   return (
-    <div class="page">
+    <div>
       <h1>{authorId ? 'Edit author' : 'Add new author'}</h1>
       {error && <p style={{ color: 'red' }}>{error}</p>}
       <form onSubmit={handleSubmit}>
@@ -79,7 +79,6 @@ function AuthorsEditingPage()
           <button type="submit">{authorId ? 'Save changes' : 'Add author'}</button>
           {authorId && (
               <button
-                type="button"
                 className="delete-button"
                 onClick={handleDelete}
               >
