@@ -1,120 +1,126 @@
-* 
-{
+/* Основные стили для всего */
+* {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-h1 
-{
+h1 {
   color: #4a4a8c;
 }
 
-ul 
-{
+ul {
   list-style-type: none;
   padding: 0;
 }
 
-button 
-{
+button {
   background-color: #4a90e2;
   color: white;
   border: none;
   padding: 8px 16px;
-  margin-top: 10px;
   border-radius: 4px;
   cursor: pointer;
 }
 
-button:hover 
-{
+button:hover {
   background-color: #357abd;
 }
 
-.container 
-{
+/* Контейнер для книги */
+.container {
   max-width: 800px;
   margin: 0 auto;
   padding: 20px;
 }
 
-nav ul 
-{
-  display: flex;
-  gap: 10px;
-  margin-bottom: 20px;
-}
-
-nav ul li 
-{
-  list-style: none;
-}
-
-nav ul li a 
-{
-  text-decoration: none;
-  color: #4a90e2;
-}
-
-nav ul li a:hover 
-{
-  color: #357abd;
-}
-
-form 
-{
+form {
   display: flex;
   flex-direction: column;
   gap: 15px;
   margin-top: 20px;
 }
 
-form div 
-{
+form div {
   display: flex;
   flex-direction: column;
 }
 
-label 
-{
+label {
   font-weight: bold;
   color: #4a4a8c;
 }
 
-input, textarea 
-{
+input, textarea {
   padding: 8px;
   border: 1px solid #ddd;
   border-radius: 4px;
 }
 
-button[type="submit"] 
-{
-  align-self: flex-start;
-  background-color: #4caf50;
-  color: white;
+
+/* Основной контейнер для формы */
+form {
+  display: flex;
+  flex-direction: column; /* Все элементы внутри будут располагаться в столбик */
+  gap: 15px;
 }
 
-button[type="submit"]:hover 
-{
+/* Контейнер для полей формы, выстраиваем их в строку */
+.form-fields {
+  display: flex;
+  flex-direction: column; /* Все элементы будут в столбик */
+  gap: 15px; /* Расстояние между элементами формы */
+}
+
+/* Контейнер для кнопок - они будут в одну строку */
+.button-group {
+  display: flex;  /* Горизонтальное расположение кнопок */
+  flex-direction: row;
+  justify-content: space-between;  /* Кнопки по краям */
+  gap: 10px;  /* Расстояние между кнопками */
+  margin-top: 20px;  /* Отступ сверху */
+  width: 100%;  /* Контейнер растягивается на всю ширину */
+}
+
+/* Кнопка Submit */
+button[type="submit"] {
+  background-color: #4caf50;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  max-width: 150px; /* Ограничиваем ширину кнопки */
+}
+
+button[type="submit"]:hover {
   background-color: #45a049;
 }
 
-body 
-{
-  margin: 0;
-  font-family: Arial, sans-serif;
-  background-color: #f4f4fb; 
+/* Кнопка Delete */
+.delete-button {
+  background-color: #af4c4c;
+  color: white;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  max-width: 150px; /* Ограничиваем ширину кнопки */
 }
 
-.container 
-{
+.delete-button:hover {
+  background-color: #9b3b3b;
+}
+
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background-color: #f4f4fb;
+}
+
+.container {
   max-width: 800px;
   margin: 20px auto;
   padding: 20px;
-  background-color: rgba(255, 255, 255, 0.8); 
+  background-color: rgba(255, 255, 255, 0.8);
   border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
-

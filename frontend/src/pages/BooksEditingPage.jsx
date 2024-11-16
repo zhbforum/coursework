@@ -60,32 +60,61 @@ function BooksEditingPage() {
       });
   };
 
+  // Обработчик удаления книги
+  const handleDelete = () => {
+    if (window.confirm('Are you sure you want to delete this book?')) {
+      axios.delete(`http://localhost:3000/books/${bookId}`)
+        .then(() => {
+          navigate('/books'); // После успешного удаления перенаправляем на список книг
+        })
+        .catch(error => {
+          setError('Error deleting book');
+          console.error('Error deleting book:', error);
+        });
+    }
+  };
+
   return (
     <div className="container">
       <h1>{bookId ? 'Edit book' : 'Add a new book'}</h1>
       {error && <p style={{ color: 'red' }}>{error}</p>} {/* Отображаем ошибки */}
+
       <form onSubmit={handleSubmit}>
-        <div>
-          <label>Title:</label>
-          <input type="text" value={title} onChange={(e) => setTitle(e.target.value)} required />
+        {/* Контейнер для полей формы */}
+        <div className="form-fields">
+          <div>
+            <label>Title:</label>
+            <input type="text" value={title} onChange={(e) => setTitle(e.target.value)} required />
+          </div>
+          <div>
+            <label>Author ID:</label>
+            <input type="number" value={authorId} onChange={(e) => setAuthorId(e.target.value)} required />
+          </div>
+          <div>
+            <label>Genre ID:</label>
+            <input type="number" value={genreId} onChange={(e) => setGenreId(e.target.value)} required />
+          </div>
+          <div>
+            <label>Total copies:</label>
+            <input type="number" value={totalCopies} onChange={(e) => setTotalCopies(e.target.value)} required />
+          </div>
+          <div>
+            <label>Available copies:</label>
+            <input type="number" value={availableCopies} onChange={(e) => setAvailableCopies(e.target.value)} required />
+          </div>
         </div>
-        <div>
-          <label>Author ID:</label>
-          <input type="number" value={authorId} onChange={(e) => setAuthorId(e.target.value)} required />
+        <div className="button-group">
+          <button type="submit">{bookId ? 'Save changes' : 'Add book'}</button>
+          {bookId && (
+            <button
+              type="button"
+              className="delete-button"
+              onClick={handleDelete}
+            >
+              Delete book
+            </button>
+          )}
         </div>
-        <div>
-          <label>Genre ID:</label>
-          <input type="number" value={genreId} onChange={(e) => setGenreId(e.target.value)} required />
-        </div>
-        <div>
-          <label>Total copies:</label>
-          <input type="number" value={totalCopies} onChange={(e) => setTotalCopies(e.target.value)} required />
-        </div>
-        <div>
-          <label>Available copies:</label>
-          <input type="number" value={availableCopies} onChange={(e) => setAvailableCopies(e.target.value)} required />
-        </div>
-        <button type="submit">{bookId ? 'Save changes' : 'Add book'}</button>
       </form>
     </div>
   );
