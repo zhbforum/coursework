@@ -7,4 +7,6 @@ router.get('/', readersController.getAllReaders);
 router.post('/', readersController.addReader); 
 router.put('/:readerId', readersController.updateReader);
 
+router.delete('/:readerId', readersController.deleteReader);
+
 module.exports = router;

@@ -81,6 +81,24 @@ const getReaderById = (req, res) =>
   });
   console.log('Executing query:', sql, [readerId]);
 };
-  
 
-module.exports = { getAllReaders, getReaderById, updateReader, addReader };
+
+const deleteReader = (req, res) => {
+  const readerId = req.params.readerId; 
+  const sql = 'DELETE FROM readers WHERE id = ?'; 
+
+  db.query(sql, [readerId], (err, result) => {
+    if (err) {
+      console.error('Request execution error:', err.message);
+      res.status(500).json({ error: 'Server error', details: err.message });
+    } else if (result.affectedRows === 0) {
+      res.status(404).json({ error: 'Reader not found' });
+    } else {
+      res.json({ message: 'Reader successfully deleted' });
+    }
+  });
+  console.log('Executing query:', sql, [readerId]);
+};
+
+
+module.exports = { getAllReaders, deleteReader, getReaderById, updateReader, addReader };
