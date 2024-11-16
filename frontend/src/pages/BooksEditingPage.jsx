@@ -97,7 +97,7 @@ function BooksEditingPage() {
   };
 
   return (
-    <div className="container">
+    <div>
       <h1>{bookId ? 'Edit book' : 'Add a new book'}</h1>
       {error && <p style={{ color: 'red' }}>{error}</p>}
       <form onSubmit={handleSubmit}>

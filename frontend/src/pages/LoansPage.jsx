@@ -33,7 +33,7 @@ function LoansPage() {
                 </div>
                 <div>
                   Date of Issue: <span className="bold-text">{formattedDate}</span> - 
-                  Fine: <span className="bold-text">${loan.fine}</span>
+                  Fine: <span className="bold-text">₴{loan.fine}</span>
                 </div>
                 <Link to={`/loans/editing/${loan.id}`}>
                   <button>Edit</button>

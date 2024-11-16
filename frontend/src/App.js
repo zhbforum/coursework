@@ -111,7 +111,6 @@ function App() {
 
             <Route path="/advanced-search" element={<AdvancedSearch />} />
 
-            {/* Admin Dashboard */}
             <Route path="/admin" element={
               <ProtectedRoute allowedRole="admin">
                 <AdminDashboard />

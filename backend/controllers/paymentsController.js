@@ -1,21 +1,22 @@
 const db = require('../config/db');
 
 const getAllPayments = (req, res) => 
-{
-  const sql = 'SELECT * FROM payments';
-  db.query(sql, (err, results) => 
   {
-    if (err) 
-    {
-      console.error('Request execution error:', err.message);
-      res.status(500).json({ error: 'Server error', details: err.message });
-    } 
-    else 
-    {
-      res.json(results);
-    }
-  });
-};
+    const sql = `
+      SELECT payments.id, payments.reader_id, payments.amount, readers.name AS reader_name
+      FROM payments
+      JOIN readers ON payments.reader_id = readers.id
+    `;
+  
+    db.query(sql, (err, results) => {
+      if (err) {
+        console.error('Error fetching loans with readers and books:', err.message);
+        res.status(500).json({ error: 'Server error', details: err.message });
+      } else {
+        res.json(results);
+      }
+    });
+  };
 
 const getPaymentById = (req, res) => 
 {

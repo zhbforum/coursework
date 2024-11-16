@@ -69,7 +69,7 @@ function PaymentsEditingPage()
       {error && <p style={{ color: 'red' }}>{error}</p>}
       <form onSubmit={handleSubmit}>
         <div>
-          <label>Reader ID:</label>
+          <label>Reader:</label>
           <input type="number" value={readerId} onChange={(e) => setReaderId(e.target.value)} required />
         </div>
         <div>
