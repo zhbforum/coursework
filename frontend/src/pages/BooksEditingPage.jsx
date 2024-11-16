@@ -4,18 +4,20 @@ import axios from 'axios';
 import { useParams, useNavigate } from 'react-router-dom';
 
 function BooksEditingPage() {
-  const { bookId } = useParams(); // Получаем bookId из параметров URL
-  const navigate = useNavigate(); // Используем navigate для перенаправления
+  const { bookId } = useParams(); 
+  const navigate = useNavigate(); 
 
-  // Состояния для хранения данных книги
   const [title, setTitle] = useState('');
   const [authorId, setAuthorId] = useState('');
   const [genreId, setGenreId] = useState('');
   const [totalCopies, setTotalCopies] = useState('');
   const [availableCopies, setAvailableCopies] = useState('');
-  const [error, setError] = useState(null); // Для отображения ошибок
+  const [error, setError] = useState(null); 
 
-  // Эффект для загрузки данных книги, если bookId есть
+  const [authors, setAuthors] = useState([]);
+  const [genres, setGenres] = useState([]);
+
+
   useEffect(() => {
     if (bookId) {
       axios.get(`http://localhost:3000/books/${bookId}`)
@@ -34,9 +36,30 @@ function BooksEditingPage() {
     }
   }, [bookId]);
 
-  // Обработчик отправки формы
+  useEffect(() => {
+    axios.get('http://localhost:3000/authors') 
+      .then(response => setAuthors(response.data))
+      .catch(error => {
+        setError('Error loading authors');
+        console.error('Error loading authors:', error);
+      });
+  }, []);
+
+  useEffect(() => 
+    {
+      axios.get('http://localhost:3000/genres')
+        .then(response => 
+        {
+          setGenres(response.data);
+        })
+        .catch(error => 
+        {
+          console.error('Error while retrieving genre data:', error);
+        });
+    }, []);
+
   const handleSubmit = (e) => {
-    e.preventDefault(); // Предотвращаем перезагрузку страницы при отправке формы
+    e.preventDefault(); 
 
     const bookData = {
       title,
@@ -47,12 +70,12 @@ function BooksEditingPage() {
     };
 
     const request = bookId
-      ? axios.put(`http://localhost:3000/books/${bookId}`, bookData) // Если bookId есть, делаем PUT запрос
-      : axios.post('http://localhost:3000/books', bookData); // Если нет, делаем POST запрос для добавления новой книги
+      ? axios.put(`http://localhost:3000/books/${bookId}`, bookData) 
+      : axios.post('http://localhost:3000/books', bookData); 
 
     request
       .then(() => {
-        navigate('/books'); // После успешного запроса перенаправляем на страницу списка книг
+        navigate('/books'); 
       })
       .catch(error => {
         setError('Error saving book data');
@@ -60,12 +83,11 @@ function BooksEditingPage() {
       });
   };
 
-  // Обработчик удаления книги
   const handleDelete = () => {
     if (window.confirm('Are you sure you want to delete this book?')) {
       axios.delete(`http://localhost:3000/books/${bookId}`)
         .then(() => {
-          navigate('/books'); // После успешного удаления перенаправляем на список книг
+          navigate('/books'); 
         })
         .catch(error => {
           setError('Error deleting book');
@@ -77,22 +99,34 @@ function BooksEditingPage() {
   return (
     <div className="container">
       <h1>{bookId ? 'Edit book' : 'Add a new book'}</h1>
-      {error && <p style={{ color: 'red' }}>{error}</p>} {/* Отображаем ошибки */}
-
+      {error && <p style={{ color: 'red' }}>{error}</p>}
       <form onSubmit={handleSubmit}>
-        {/* Контейнер для полей формы */}
         <div className="form-fields">
           <div>
             <label>Title:</label>
             <input type="text" value={title} onChange={(e) => setTitle(e.target.value)} required />
           </div>
           <div>
-            <label>Author ID:</label>
-            <input type="number" value={authorId} onChange={(e) => setAuthorId(e.target.value)} required />
+            <label>Author:</label>
+            <select value={authorId} onChange={(e) => setAuthorId(e.target.value)} required>
+              <option value="" disabled>Select an author</option>
+              {authors.map(author => (
+                <option key={author.id} value={author.id}>
+                  {author.name}
+                </option>
+              ))}
+            </select>
           </div>
           <div>
-            <label>Genre ID:</label>
-            <input type="number" value={genreId} onChange={(e) => setGenreId(e.target.value)} required />
+            <label>Genre:</label>
+            <select value={genreId} onChange={(e) => setGenreId(e.target.value)} required>
+              <option value="" disabled>Select a genre</option>
+              {genres.map(genre => (
+                <option key={genre.id} value={genre.id}>
+                  {genre.genre_name}
+                </option>
+              ))}
+            </select>
           </div>
           <div>
             <label>Total copies:</label>

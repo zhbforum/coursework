@@ -8,6 +8,7 @@ function GenresEditingPage()
   const navigate = useNavigate();
 
   const [genreName, setGenreName] = useState('');
+  const [error, setError] = useState(null); 
 
   useEffect(() => 
 {
@@ -26,7 +27,7 @@ function GenresEditingPage()
     }
   }, [genreId]);
 
-  const handleSubmit = (e) => 
+const handleSubmit = (e) => 
 {
     e.preventDefault();
     const genreData = { genre_name: genreName };
@@ -46,15 +47,41 @@ function GenresEditingPage()
       });
   };
 
+  const handleDelete = () => 
+  {
+    if (window.confirm('Are you sure you want to delete this book?')) {
+      axios.delete(`http://localhost:3000/genres/${genreId}`)
+        .then(() => {
+          navigate('/genres'); 
+        })
+        .catch(error => {
+          setError('Error deleting genre');
+          console.error('Error deleting genre:', error);
+        });
+    }
+  };
+
   return (
     <div>
       <h1>{genreId ? 'Edit genre' : 'Add new genre'}</h1>
+      {error && <p style={{ color: 'red' }}>{error}</p>}
       <form onSubmit={handleSubmit}>
         <div>
           <label>Genre name:</label>
           <input type="text" value={genreName} onChange={(e) => setGenreName(e.target.value)} required />
         </div>
-        <button type="submit">{genreId ? 'Save changes' : 'Add genre'}</button>
+        <div className="button-group">
+          <button type="submit">{genreId ? 'Save changes' : 'Add genre'}</button>
+          {genreId && (
+            <button
+              type="button"
+              className="delete-button"
+              onClick={handleDelete}
+            >
+              Delete genre
+            </button>
+          )}
+        </div>
       </form>
     </div>
   );
