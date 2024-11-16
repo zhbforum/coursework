@@ -63,7 +63,7 @@ function AuthorsEditingPage()
   };
 
   return (
-    <div class="page">
+    <div>
       <h1>{authorId ? 'Edit author' : 'Add new author'}</h1>
       {error && <p style={{ color: 'red' }}>{error}</p>}
       <form onSubmit={handleSubmit}>
