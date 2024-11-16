@@ -7,4 +7,6 @@ router.get('/:paymentId', paymentsController.getPaymentById);
 router.post('/', paymentsController.addPayment);
 router.put('/:paymentId', paymentsController.updatePayment);
 
+router.delete('/:paymentId', paymentsController.deletePayment);
+
 module.exports = router;

@@ -80,4 +80,20 @@ const updateGenre = (req, res) =>
   });
 };
 
-module.exports = { getAllGenres, getGenreById, addGenre, updateGenre };
+const deleteGenre = (req, res) => {
+  const genreId = req.params.genreId; 
+  const sql = 'DELETE FROM genres WHERE id = ?'; 
+
+  db.query(sql, [genreId], (err, result) => {
+    if (err) {
+      console.error('Request execution error:', err.message);
+      res.status(500).json({ error: 'Server error', details: err.message });
+    } else if (result.affectedRows === 0) {
+      res.status(404).json({ error: 'Genre not found' });
+    } else {
+      res.json({ message: 'Genre successfully deleted' });
+    }
+  });
+};
+
+module.exports = { getAllGenres, deleteGenre, getGenreById, addGenre, updateGenre };

@@ -78,4 +78,20 @@ const updatePayment = (req, res) =>
   });
 };
 
-module.exports = { getAllPayments, getPaymentById, addPayment, updatePayment };
+const deletePayment = (req, res) => {
+  const paymentId = req.params.paymentId; 
+  const sql = 'DELETE FROM payments WHERE id = ?'; 
+
+  db.query(sql, [paymentId], (err, result) => {
+    if (err) {
+      console.error('Request execution error:', err.message);
+      res.status(500).json({ error: 'Server error', details: err.message });
+    } else if (result.affectedRows === 0) {
+      res.status(404).json({ error: 'Payment not found' });
+    } else {
+      res.json({ message: 'Payment successfully deleted' });
+    }
+  });
+};
+
+module.exports = { getAllPayments, deletePayment, getPaymentById, addPayment, updatePayment };

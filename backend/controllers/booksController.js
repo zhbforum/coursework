@@ -141,4 +141,20 @@ const searchWithFilters = (req, res) => {
   });
 };
 
-module.exports = { searchBooks, getAllBooks, updateBook, getBookById, addBook, searchWithFilters};
+const deleteBook = (req, res) => {
+  const bookId = req.params.bookId; 
+  const sql = 'DELETE FROM books WHERE id = ?'; 
+
+  db.query(sql, [bookId], (err, result) => {
+    if (err) {
+      console.error('Request execution error:', err.message);
+      res.status(500).json({ error: 'Server error', details: err.message });
+    } else if (result.affectedRows === 0) {
+      res.status(404).json({ error: 'Book not found' });
+    } else {
+      res.json({ message: 'Book successfully deleted' });
+    }
+  });
+};
+
+module.exports = { searchBooks, getAllBooks, deleteBook, updateBook, getBookById, addBook, searchWithFilters};

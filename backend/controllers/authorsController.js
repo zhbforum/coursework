@@ -82,4 +82,21 @@ const updateAuthor = (req, res) =>
   });
 };
 
-module.exports = { getAllAuthors, getAuthorById, addAuthor, updateAuthor };
+
+const deleteAuthor = (req, res) => {
+  const authorId = req.params.authorId; 
+  const sql = 'DELETE FROM authors WHERE id = ?'; 
+
+  db.query(sql, [authorId], (err, result) => {
+    if (err) {
+      console.error('Request execution error:', err.message);
+      res.status(500).json({ error: 'Server error', details: err.message });
+    } else if (result.affectedRows === 0) {
+      res.status(404).json({ error: 'Author not found' });
+    } else {
+      res.json({ message: 'Author successfully deleted' });
+    }
+  });
+};
+
+module.exports = { getAllAuthors, deleteAuthor, getAuthorById, addAuthor, updateAuthor };
