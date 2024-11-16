@@ -19,7 +19,7 @@ import SearchBooks from './pages/SearchBooksPage';
 import AdvancedSearch from './components/AdvancedSearch'; 
 import ProtectedRoute from './ProtectedRoute';
 import AdminDashboard from './pages/AdminDashboard';
-import LoginPage from './pages/LoginPage'; // Импортируйте LoginPage
+import LoginPage from './pages/LoginPage'; 
 
 import './App.css';
 
@@ -32,7 +32,7 @@ function App() {
           <Routes>
             <Route path="/" element={<HomePage />} />
             
-            <Route path="/login" element={<LoginPage />} /> {/* Маршрут для страницы логина */}
+            <Route path="/login" element={<LoginPage />} />
             
             <Route path="/books" element={<BooksPage />} />
             <Route path="/books/search" element={<SearchBooks />} />
