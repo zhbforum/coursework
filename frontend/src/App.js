@@ -24,7 +24,7 @@ function App()
 {
   return (
     <Router>
-      <div className="app">
+      <div className="page">
         <Header />
         <main className="container">
           <Routes>
