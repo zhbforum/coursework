@@ -79,7 +79,6 @@ function AuthorsEditingPage()
           <button type="submit">{authorId ? 'Save changes' : 'Add author'}</button>
           {authorId && (
               <button
-                type="button"
                 className="delete-button"
                 onClick={handleDelete}
               >
