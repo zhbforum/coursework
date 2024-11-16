@@ -88,6 +88,12 @@ form
   gap: 15px; 
 }
 
+.bold-text 
+{
+  font-weight: bold;
+}
+
+
 .button-group 
 {
   display: flex; 
