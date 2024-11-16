@@ -7,4 +7,6 @@ router.get('/:genreId', genresController.getGenreById);
 router.post('/', genresController.addGenre);
 router.put('/:genreId', genresController.updateGenre);
 
+router.delete('/:genreId', genresController.deleteGenre);
+
 module.exports = router;

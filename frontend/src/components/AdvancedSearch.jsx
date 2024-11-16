@@ -1,22 +1,35 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
 function AdvancedSearch() {
   const [query, setQuery] = useState('');
-  const [genre, setGenre] = useState('');
+  const [genreId, setGenreId] = useState('');
   const [results, setResults] = useState([]);
+  const [genres, setGenres] = useState([]);
 
   const handleSearch = async (e) => {
     e.preventDefault();
     try {
+      const genreFilter = genreId || undefined;
       const response = await axios.get('http://localhost:3000/books/search-with-filters', {
-        params: { query, genre },
+        params: { query, genre: genreFilter },
       });
       setResults(response.data);
     } catch (error) {
       console.error('Ошибка при выполнении поиска:', error);
     }
   };
+
+  useEffect(() => {
+    axios
+      .get('http://localhost:3000/genres')
+      .then((response) => {
+        setGenres(response.data);
+      })
+      .catch((error) => {
+        console.error('Error while retrieving genre data:', error);
+      });
+  }, []);
 
   return (
     <div>
@@ -28,25 +41,28 @@ function AdvancedSearch() {
           value={query}
           onChange={(e) => setQuery(e.target.value)}
         />
-        <select value={genre} onChange={(e) => setGenre(e.target.value)}>
+        <select value={genreId} onChange={(e) => setGenreId(e.target.value)}>
           <option value="">All genres</option>
-          <option value="Fantastic">Fantastic</option>
-          <option value="Fantasy">Fantasy</option>
-          <option value="Classic">Classic</option>
+          {genres.map((genre) => (
+            <option key={genre.id} value={genre.genre_name}>
+              {genre.genre_name}
+            </option>
+          ))}
         </select>
         <button type="submit">Search</button>
       </form>
 
       <div>
         <h3>Result of search:</h3>
-        <ul>
-          {results.map((result) => 
-          (
-            <li key={result.book_id}>
-              {result.title} — Author: {result.author_name} — Genre: {result.genre_name}
-            </li>
+        <div className="card-container">
+          {results.map((result) => (
+            <div className="card" key={result.book_id}>
+              <h4>{result.title}</h4>
+              <p><strong>Author:</strong> {result.author_name}</p>
+              <p><strong>Genre:</strong> {result.genre_name}</p>
+            </div>
           ))}
-        </ul>
+        </div>
       </div>
     </div>
   );

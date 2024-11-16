@@ -10,6 +10,7 @@ function PaymentsEditingPage()
   const [readerId, setReaderId] = useState('');
   const [amount, setAmount] = useState('');
   const [paymentDate, setPaymentDate] = useState('');
+  const [error, setError] = useState(null); 
 
   useEffect(() => 
     {
@@ -49,9 +50,23 @@ function PaymentsEditingPage()
       });
   };
 
+  const handleDelete = () => {
+    if (window.confirm('Are you sure you want to delete this book?')) {
+      axios.delete(`http://localhost:3000/payments/${paymentId}`)
+        .then(() => {
+          navigate('/payments'); 
+        })
+        .catch(error => {
+          setError('Error deleting payment');
+          console.error('Error deleting payment:', error);
+        });
+    }
+  };
+
   return (
     <div>
       <h1>{paymentId ? 'Edit payment' : 'Add a new payment'}</h1>
+      {error && <p style={{ color: 'red' }}>{error}</p>}
       <form onSubmit={handleSubmit}>
         <div>
           <label>Reader ID:</label>
@@ -65,7 +80,18 @@ function PaymentsEditingPage()
           <label>Payment date:</label>
           <input type="date" value={paymentDate} onChange={(e) => setPaymentDate(e.target.value)} required />
         </div>
-        <button type="submit">{paymentId ? 'Save changes' : 'Add payment'}</button>
+        <div className="button-group">
+          <button type="submit">{paymentId ? 'Save changes' : 'Add payment'}</button>
+          {paymentId && (
+            <button
+              type="button"
+              className="delete-button"
+              onClick={handleDelete}
+            >
+              Delete payment
+            </button>
+          )}
+        </div>
       </form>
     </div>
   );

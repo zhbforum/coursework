@@ -1,22 +1,5 @@
 const db = require('../config/db');
 
-const getAllLoans = (req, res) => 
-{
-  const sql = 'SELECT * FROM loans';
-  db.query(sql, (err, results) => 
-  {
-    if (err) 
-    {
-      console.error('Request execution error:', err.message);
-      res.status(500).json({ error: 'Server error', details: err.message });
-    } 
-    else 
-    {
-      res.json(results);
-    }
-  });
-};
-
 const addLoan = (req, res) => 
 {
   const { reader_id, book_id, loan_date } = req.body;
@@ -39,9 +22,9 @@ const addLoan = (req, res) =>
 const updateLoan = (req, res) => 
 {
   const loanId = req.params.loanId;
-  const { reader_id, book_id, loan_date } = req.body;
-  const sql = 'UPDATE loans SET reader_id = ?, book_id = ?, loan_date = ? WHERE id = ?';
-  db.query(sql, [reader_id, book_id, loan_date, loanId], (err, result) => 
+  const { reader_id, book_id, loan_date, return_date, is_returned, fine} = req.body;
+  const sql = 'UPDATE loans SET reader_id = ?, book_id = ?, loan_date = ?, return_date = ?, is_returned = ?, fine = ? WHERE id = ?';
+  db.query(sql, [reader_id, book_id, loan_date, return_date, is_returned, fine, loanId], (err, result) => 
   {
     if (err) 
     {
@@ -82,5 +65,25 @@ const getLoanById = (req, res) =>
   console.log('Executing query:', sql, [loanId]);
 };
 
+const getAllLoans = (req, res) => 
+{
 
-module.exports = { getAllLoans, updateLoan, getLoanById, addLoan };
+  const sql = `
+    SELECT loans.id, loans.loan_date, loans.reader_id, readers.name AS reader_name, loans.book_id, books.title AS book_title, loans.fine
+    FROM loans
+    JOIN readers ON loans.reader_id = readers.id
+    JOIN books ON loans.book_id = books.id
+    WHERE loans.is_returned = 0
+  `;
+
+  db.query(sql, (err, results) => {
+    if (err) {
+      console.error('Error fetching loans with readers and books:', err.message);
+      res.status(500).json({ error: 'Server error', details: err.message });
+    } else {
+      res.json(results);
+    }
+  });
+};
+
+module.exports = {getAllLoans, updateLoan, getLoanById, addLoan };

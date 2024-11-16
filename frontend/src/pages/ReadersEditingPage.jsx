@@ -10,6 +10,7 @@ function ReadersEditingPage()
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
+  const [error, setError] = useState(null);
 
   useEffect(() => 
  {
@@ -50,9 +51,23 @@ function ReadersEditingPage()
       });
   };
 
+  const handleDelete = () => {
+    if (window.confirm('Are you sure you want to delete this book?')) {
+      axios.delete(`http://localhost:3000/readers/${readerId}`)
+        .then(() => {
+          navigate('/readers'); 
+        })
+        .catch(error => {
+          setError('Error deleting reader');
+          console.error('Error deleting reader:', error);
+        });
+    }
+  };
+
   return (
     <div>
       <h1>{readerId ? 'Edit reader' : 'Add new reader'}</h1>
+      {error && <p style={{ color: 'red' }}>{error}</p>}
       <form onSubmit={handleSubmit}>
         <div>
           <label>Name:</label>
@@ -66,7 +81,18 @@ function ReadersEditingPage()
           <label>Telephone number:</label>
           <input type="text" value={phone} onChange={(e) => setPhone(e.target.value)} required />
         </div>
-        <button type="submit">{readerId ? 'Save changes' : 'Add reader'}</button>
+        <div className="button-group">
+          <button type="submit">{readerId ? 'Save changes' : 'Add reader'}</button>
+          {readerId && (
+            <button
+              type="button"
+              className="delete-button"
+              onClick={handleDelete}
+            >
+              Delete reader
+            </button>
+          )}
+        </div>
       </form>
     </div>
   );

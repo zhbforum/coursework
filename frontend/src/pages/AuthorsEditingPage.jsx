@@ -9,6 +9,7 @@ function AuthorsEditingPage()
 
   const [name, setName] = useState('');
   const [bio, setBio] = useState('');
+  const [error, setError] = useState(null); 
 
   useEffect(() => 
 {
@@ -48,9 +49,23 @@ function AuthorsEditingPage()
       });
   };
 
+  const handleDelete = () => {
+    if (window.confirm('Are you sure you want to delete this author?')) {
+      axios.delete(`http://localhost:3000/authors/${authorId}`)
+        .then(() => {
+          navigate('/authors'); 
+        })
+        .catch(error => {
+          setError('Error deleting author');
+          console.error('Error deleting author:', error);
+        });
+    }
+  };
+
   return (
-    <div>
+    <div class="page">
       <h1>{authorId ? 'Edit author' : 'Add new author'}</h1>
+      {error && <p style={{ color: 'red' }}>{error}</p>}
       <form onSubmit={handleSubmit}>
         <div>
           <label>Name:</label>
@@ -60,7 +75,18 @@ function AuthorsEditingPage()
           <label>Biography:</label>
           <textarea value={bio} onChange={(e) => setBio(e.target.value)} required />
         </div>
-        <button type="submit">{authorId ? 'Save changes' : 'Add author'}</button>
+        <div className="button-group">
+          <button type="submit">{authorId ? 'Save changes' : 'Add author'}</button>
+          {authorId && (
+              <button
+                type="button"
+                className="delete-button"
+                onClick={handleDelete}
+              >
+                Delete book
+              </button>
+            )}
+        </div>
       </form>
     </div>
   );

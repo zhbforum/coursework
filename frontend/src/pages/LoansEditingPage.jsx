@@ -11,6 +11,8 @@ function LoansEditingPage()
   const [bookId, setBookId] = useState('');
   const [loanDate, setLoanDate] = useState('');
   const [returnDate, setReturnDate] = useState('');
+  const [loanIsReturned, setIsReturned] = useState('');
+  const [loanFine, setFine] = useState('');
 
   useEffect(() => 
     {
@@ -24,6 +26,8 @@ function LoansEditingPage()
           setBookId(loan.book_id);
           setLoanDate(loan.loan_date);
           setReturnDate(loan.return_date || '');
+          setIsReturned(loan.is_returned);
+          setFine(loan.fine);
         })
         .catch(error => 
         {
@@ -35,7 +39,7 @@ function LoansEditingPage()
   const handleSubmit = (e) => 
     {
     e.preventDefault();
-    const loanData = { reader_id: readerId, book_id: bookId, loan_date: loanDate, return_date: returnDate };
+    const loanData = { reader_id: readerId, book_id: bookId, loan_date: loanDate, return_date: returnDate, is_returned: loanIsReturned, fine: loanFine};
 
     const request = loanId
       ? axios.put(`http://localhost:3000/loans/${loanId}`, loanData)
@@ -71,6 +75,14 @@ function LoansEditingPage()
         <div>
           <label>Return date:</label>
           <input type="date" value={returnDate} onChange={(e) => setReturnDate(e.target.value)} />
+        </div>
+        <div>
+          <label>Is Returned:</label>
+          <input type="number" value={loanIsReturned} onChange={(e) => setIsReturned(e.target.value)} />
+        </div>
+        <div>
+          <label>Fine:</label>
+          <input type="number" value={loanFine} onChange={(e) => setFine(e.target.value)} />
         </div>
         <button type="submit">{loanId ? 'Save changes' : 'Add position'}</button>
       </form>
