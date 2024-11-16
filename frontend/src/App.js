@@ -17,6 +17,8 @@ import GenresEditingPage from './pages/GenresEditingPage';
 import HomePage from './pages/HomePage';
 import SearchBooks from './pages/SearchBooksPage';
 import AdvancedSearch from './components/AdvancedSearch'; 
+import ProtectedRoute from './ProtectedRoute';
+import AdminDashboard from './pages/AdminDashboard';
 
 import './App.css';
 
@@ -31,31 +33,88 @@ function App()
             <Route path="/" element={<HomePage />} />
             
             <Route path="/books" element={<BooksPage />} />
-            <Route path="/books/editing" element={<BooksEditingPage />} />
-            <Route path="/books/editing/:bookId" element={<BooksEditingPage />} />
             <Route path="/books/search" element={<SearchBooks />} />
 
+            {/* Protected routes for editing */}
+            <Route path="/books/editing" element={
+              <ProtectedRoute allowedRole="admin">
+                <BooksEditingPage />
+              </ProtectedRoute>
+            } />
+            <Route path="/books/editing/:bookId" element={
+              <ProtectedRoute allowedRole="admin">
+                <BooksEditingPage />
+              </ProtectedRoute>
+            } />
+
             <Route path="/readers" element={<ReadersPage />} />
-            <Route path="/readers/editing" element={<ReadersEditingPage />} />
-            <Route path="/readers/editing/:readerId" element={<ReadersEditingPage />} />
+            <Route path="/readers/editing" element={
+              <ProtectedRoute allowedRole="admin">
+                <ReadersEditingPage />
+              </ProtectedRoute>
+            } />
+            <Route path="/readers/editing/:readerId" element={
+              <ProtectedRoute allowedRole="admin">
+                <ReadersEditingPage />
+              </ProtectedRoute>
+            } />
 
             <Route path="/loans" element={<LoansPage />} />
-            <Route path="/loans/editing" element={<LoansEditingPage />} />
-            <Route path="/loans/editing/:loanId" element={<LoansEditingPage />} />
+            <Route path="/loans/editing" element={
+              <ProtectedRoute allowedRole="admin">
+                <LoansEditingPage />
+              </ProtectedRoute>
+            } />
+            <Route path="/loans/editing/:loanId" element={
+              <ProtectedRoute allowedRole="admin">
+                <LoansEditingPage />
+              </ProtectedRoute>
+            } />
 
             <Route path="/authors" element={<AuthorsPage />} />
-            <Route path="/authors/editing" element={<AuthorsEditingPage />} />
-            <Route path="/authors/editing/:authorId" element={<AuthorsEditingPage />} />
+            <Route path="/authors/editing" element={
+              <ProtectedRoute allowedRole="admin">
+                <AuthorsEditingPage />
+              </ProtectedRoute>
+            } />
+            <Route path="/authors/editing/:authorId" element={
+              <ProtectedRoute allowedRole="admin">
+                <AuthorsEditingPage />
+              </ProtectedRoute>
+            } />
 
             <Route path="/payments" element={<PaymentsPage />} />
-            <Route path="/payments/editing" element={<PaymentsEditingPage />} />
-            <Route path="/payments/editing/:paymentId" element={<PaymentsEditingPage />} />
+            <Route path="/payments/editing" element={
+              <ProtectedRoute allowedRole="admin">
+                <PaymentsEditingPage />
+              </ProtectedRoute>
+            } />
+            <Route path="/payments/editing/:paymentId" element={
+              <ProtectedRoute allowedRole="admin">
+                <PaymentsEditingPage />
+              </ProtectedRoute>
+            } />
 
             <Route path="/genres" element={<GenresPage />} />
-            <Route path="/genres/editing" element={<GenresEditingPage />} />
-            <Route path="/genres/editing/:genreId" element={<GenresEditingPage />} />
+            <Route path="/genres/editing" element={
+              <ProtectedRoute allowedRole="admin">
+                <GenresEditingPage />
+              </ProtectedRoute>
+            } />
+            <Route path="/genres/editing/:genreId" element={
+              <ProtectedRoute allowedRole="admin">
+                <GenresEditingPage />
+              </ProtectedRoute>
+            } />
 
             <Route path="/advanced-search" element={<AdvancedSearch />} />
+
+            {/* Admin Dashboard */}
+            <Route path="/admin" element={
+              <ProtectedRoute allowedRole="admin">
+                <AdminDashboard />
+              </ProtectedRoute>
+            } />
           </Routes>
         </main>
         <Footer />

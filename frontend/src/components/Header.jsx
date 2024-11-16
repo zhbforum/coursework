@@ -7,6 +7,8 @@ function Header() {
     <header className="header">
       <Link to="/" className="logo">
         <div className="header-logo">Library Management</div>
+        <Link to="/login">Login</Link>
+
       </Link>
       <nav>
         <ul>
