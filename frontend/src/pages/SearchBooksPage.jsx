@@ -43,7 +43,8 @@ function SearchBooks()
         <button type="submit">Search</button>
       </form>
       <ul>
-        {results.map((book) => (
+        {results.map((book) => 
+        (
           <li key={book.id}>
             {book.title} — Author ID: {book.author_id}
           </li>
