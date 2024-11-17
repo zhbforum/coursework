@@ -50,7 +50,7 @@ function AdvancedSearch()
           value={query}
           onChange={(e) => setQuery(e.target.value)}
         />
-        <select value={genreId} onChange={(e) => setGenreId(e.target.value)}>
+        <select className="genre-select" value={genreId} onChange={(e) => setGenreId(e.target.value)}>
           <option value="">All genres</option>
           {genres.map((genre) => 
           (

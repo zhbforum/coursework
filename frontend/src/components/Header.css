@@ -1,6 +1,6 @@
 .header 
 {
-    background: linear-gradient(90deg, #4b6cb7, #182848); 
+    background: linear-gradient(90deg, #504026, #b48e67);
     color: #fff;
     padding: 15px 30px;
     display: flex;
@@ -18,12 +18,7 @@
     text-decoration: none;
     transition: color 0.3s ease;
 }
-  
-.header-logo:hover 
-{
-    color: #dcdcdc; 
-}
-  
+
 .header nav ul 
 {
     display: flex;
@@ -31,15 +26,36 @@
     list-style-type: none;
 }
   
-.header nav ul li a 
+.header nav ul li a,
+.auth-text a,
+.logo-container .logo 
 {
-    color: #f0f0f5;
-    text-decoration: none;
-    font-weight: 500;
-    font-size: 1.1em; 
-    transition: color 0.3s ease, transform 0.3s ease; 
+    text-decoration: none; 
+    color: inherit; 
+}
+
+.header nav ul li a:visited,
+.auth-text a:visited,
+.logo-container .logo:visited 
+{
+    color: inherit; 
+    text-decoration: none; 
 }
   
+.header nav ul li a:active,
+.auth-text a:active,
+.logo-container .logo:active 
+{
+    color: #ffdd57; 
+    text-decoration: none; 
+}
+
+.header-logo:active
+{
+    color: #ffdd57; 
+    text-decoration: none; 
+}
+
 .header nav ul li a:hover 
 {
     color: #ffdd57; 
@@ -52,7 +68,7 @@
     align-items: center;
 }
 
-  .search-icon img 
+.search-icon img 
 {
     width: 24px;
     height: 24px;
@@ -60,8 +76,41 @@
     transition: transform 0.3s ease;
 }
   
-  .search-icon img:hover 
+.search-icon img:hover 
 {
     transform: scale(1.1);
 }
   
+.genre-select 
+{
+    width: 100%; 
+    max-width: 760px; 
+    padding: 8px; 
+    font-size: 1em; 
+    border: 2px solid #ccc; 
+    border-radius: 4px; 
+    background-color: #f9f9f9; 
+    color: #333; 
+    appearance: none; 
+    outline: none; 
+    cursor: pointer; 
+    transition: all 0.3s ease; 
+}
+
+.genre-select:hover 
+{
+    border-color: #4a90e2; 
+    background-color: #f0f8ff; 
+}
+
+.genre-select:focus 
+{
+    border-color: #4a90e2; 
+    box-shadow: 0 0 5px rgba(74, 144, 226, 0.5); 
+}
+
+.genre-select option 
+{
+    background-color: #fff; 
+    color: #333; 
+}

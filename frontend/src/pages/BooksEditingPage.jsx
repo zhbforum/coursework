@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useParams, useNavigate } from 'react-router-dom';
 
-// Подкомпоненты
 const InputField = ({ label, type, value, onChange, required = false }) => 
 {
   return (
@@ -33,7 +32,6 @@ const SelectField = ({ label, value, onChange, options, required = false }) =>
   );
 };
 
-// Функции API
 const fetchBook = async (id) => 
 {
   try 

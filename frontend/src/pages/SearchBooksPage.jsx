@@ -44,13 +44,13 @@ function SearchBooks()
       </form>
       <ul>
         {results.map((book) => 
-        {
-          return (
-            <li key={book.id}>
-              {book.title} — Author ID: {book.author_id}
-            </li>
-          );
-        })}
+          {
+            return (
+              <li key={book.id}>
+                {book.title} — Author ID: {book.author_id}
+              </li>
+            );
+          })}
       </ul>
     </div>
   );

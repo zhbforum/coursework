@@ -1,6 +1,6 @@
 .footer 
 {
-    background: linear-gradient(90deg, #182848, #4b6cb7); 
+    background: linear-gradient(90deg,#b48e67, #504026);
     color: #ccc;
     padding: 15px 30px;
     text-align: center;
@@ -20,12 +20,7 @@
     color: #f0f0f5;
     transition: color 0.3s ease;
 }
-  
-.footer-logo:hover 
-{
-    color: #ffdd57; 
-}
-  
+
 .footer p 
 {
     margin: 0;
