@@ -45,8 +45,7 @@ function SearchBooks()
       <ul>
         {results.map((book) => 
         {
-          return 
-        (
+          return (
             <li key={book.id}>
               {book.title} — Author ID: {book.author_id}
             </li>
