@@ -187,4 +187,3 @@ If you are using a Unix-based system (Linux, macOS), you may need to use `sudo`:
 - **Frontend:** The frontend is developed with React. If you encounter any issues with `npm start` or `yarn start`, try reinstalling dependencies with `npm install` or `yarn install`.
 - **Backend:** Ensure the backend is running before starting the frontend to ensure full functionality.
 
-Enjoy working with the design interface!
