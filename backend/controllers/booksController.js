@@ -89,33 +89,41 @@ const updateBook = (req, res) =>
 
 };
 
-const searchBooks = (req, res) => {
+const searchBooks = (req, res) => 
+{
   const { title, author } = req.query;
   let sql = 'SELECT * FROM books WHERE 1=1';
   const params = [];
 
-  if (title) {
+  if (title) 
+  {
     sql += ' AND title LIKE ?';
     params.push(`%${title}%`);
   }
 
-  if (author) {
+  if (author) 
+  {
     sql += ' AND author_id IN (SELECT id FROM authors WHERE name LIKE ?)';
     params.push(`%${author}%`);
   }
 
-  db.query(sql, params, (err, results) => {
-    if (err) {
+  db.query(sql, params, (err, results) => 
+  {
+    if (err) 
+    {
       console.error('Request execution error:', err.message);
       res.status(500).json({ error: 'Server error' });
-    } else {
+    } 
+    else 
+    {
       res.json(results);
     }
   });
 };
 
 
-const searchWithFilters = (req, res) => {
+const searchWithFilters = (req, res) => 
+{
   const { query, genre } = req.query; 
   let sql = `
     SELECT books.*, authors.name AS author_name, genres.genre_name
@@ -126,32 +134,44 @@ const searchWithFilters = (req, res) => {
   `;
   const params = [`%${query}%`, `%${query}%`];
 
-  if (genre) {
+  if (genre) 
+  {
     sql += ' AND genres.genre_name = ?';
     params.push(genre);
   }
 
-  db.query(sql, params, (err, results) => {
-    if (err) {
+  db.query(sql, params, (err, results) => 
+  {
+    if (err) 
+    {
       console.error('Ошибка выполнения запроса:', err.message);
       res.status(500).json({ error: 'Ошибка сервера' });
-    } else {
+    } 
+    else 
+    {
       res.json(results);
     }
   });
 };
 
-const deleteBook = (req, res) => {
+const deleteBook = (req, res) => 
+{
   const bookId = req.params.bookId; 
   const sql = 'DELETE FROM books WHERE id = ?'; 
 
-  db.query(sql, [bookId], (err, result) => {
-    if (err) {
+  db.query(sql, [bookId], (err, result) => 
+  {
+    if (err) 
+    {
       console.error('Request execution error:', err.message);
       res.status(500).json({ error: 'Server error', details: err.message });
-    } else if (result.affectedRows === 0) {
+    } 
+    else if (result.affectedRows === 0) 
+    {
       res.status(404).json({ error: 'Book not found' });
-    } else {
+    } 
+    else 
+    {
       res.json({ message: 'Book successfully deleted' });
     }
   });

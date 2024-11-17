@@ -26,18 +26,22 @@ app.use('/payments', paymentsRoutes);
 app.use('/genres', genresRoutes);
 app.use('/auth', authRoutes);
 
-function authenticateToken(req, res, next) {
+function authenticateToken(req, res, next) 
+{
   const token = req.headers['authorization']?.split(' ')[1];
   console.log('Received Token:', token);
 
-  if (!token) {
-      return res.status(401).json({ message: 'Требуется токен авторизации' });
-  }
+  if (!token) 
+{   
+    return res.status(401).json({ message: 'Authorization token required' });
+}
 
-  jwt.verify(token, SECRET_KEY, (err, user) => {
-      if (err) {
-          console.error('JWT Error:', err);
-          return res.status(403).json({ message: 'Недействительный токен' });
+  jwt.verify(token, SECRET_KEY, (err, user) => 
+  {
+      if (err) 
+      {
+        console.error('JWT Error:', err);
+        return res.status(403).json({ message: 'Invalid token' });
       }
       req.user = user;
       next();
@@ -51,7 +55,7 @@ function checkRole(requiredRole)
         const userRole = req.user?.role;
         if (userRole !== requiredRole)
         {
-            return res.status(403).json({ message: 'Доступ запрещён' });
+            return res.status(403).json({ message: 'Access denied' });
         }
         next();
     };
@@ -71,10 +75,10 @@ app.post('/admin/books', authenticateToken, checkRole('admin'), (req, res) =>
     {
         if (err) 
         {
-            console.error('Ошибка выполнения запроса:', err.message);
-            return res.status(500).json({ error: 'Ошибка сервера', details: err.message });
+            console.error('Request execution error:', err.message);
+            return res.status(500).json({ error: 'Server error', details: err.message });
         }
-        res.status(201).json({ message: 'Книга успешно добавлена', bookId: result.insertId });
+        res.status(201).json({ message: 'Book added successfully', bookId: result.insertId });
     });
 });
 
@@ -83,7 +87,6 @@ const userToken = jwt.sign({ username: 'user', role: 'user' }, 'your_secret_key'
 
 console.log('Admin Token:', adminToken);
 console.log('User Token:', userToken);
-
 
 app.listen(port, () => 
 {
