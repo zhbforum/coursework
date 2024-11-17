@@ -288,3 +288,15 @@ textarea {
     background-color: #fff; 
     color: #333; 
 }
+
+.left-aligned 
+{
+  display: flex;
+  align-items: left;
+  justify-content: flex-start;
+}
+
+.left-aligned label 
+{
+  margin-right: 8px;
+}

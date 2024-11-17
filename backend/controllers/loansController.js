@@ -2,10 +2,10 @@ const db = require('../config/db');
 
 const addLoan = (req, res) => 
 {
-  const { reader_id, book_id, loan_date } = req.body;
-  const sql = `INSERT INTO loans (reader_id, book_id, loan_date) VALUES (?, ?, ?)`;
+  const { reader_id, book_id, loan_date, return_date, is_returned, fine} = req.body;
+  const sql = `INSERT INTO loans (reader_id, book_id, loan_date, return_date, is_returned, fine) VALUES (?, ?, ?, ?, ?, ?)`;
 
-  db.query(sql, [reader_id, book_id, loan_date], (err, result) => 
+  db.query(sql, [reader_id, book_id, loan_date, return_date, is_returned, fine], (err, result) => 
   {
     if (err) 
     {

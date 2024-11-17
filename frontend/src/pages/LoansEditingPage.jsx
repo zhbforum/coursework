@@ -4,19 +4,20 @@ import { useParams, useNavigate } from 'react-router-dom';
 
 function LoansEditingPage() 
 {
-  const { loanId } = useParams();
+  const { loanId } = useParams(); // ID займа из URL
   const navigate = useNavigate();
 
+  // Состояния для хранения полей формы
   const [readerId, setReaderId] = useState('');
   const [bookId, setBookId] = useState('');
   const [loanDate, setLoanDate] = useState('');
   const [returnDate, setReturnDate] = useState('');
-  const [loanIsReturned, setIsReturned] = useState('');
+  const [loanIsReturned, setIsReturned] = useState(false); // Булевое значение
   const [loanFine, setFine] = useState('');
 
   useEffect(() => 
   {
-    if (loanId) 
+    if (loanId) // Если ID существует, загружаем данные
     {
       axios.get(`http://localhost:3000/loans/${loanId}`)
         .then(response => 
@@ -24,14 +25,14 @@ function LoansEditingPage()
           const loan = response.data;
           setReaderId(loan.reader_id);
           setBookId(loan.book_id);
-          setLoanDate(loan.loan_date);
-          setReturnDate(loan.return_date || '');
+          setLoanDate(loan.loan_date ? loan.loan_date.split('T')[0] : ''); // Форматируем дату
+          setReturnDate(loan.return_date ? loan.return_date.split('T')[0] : '');
           setIsReturned(loan.is_returned);
           setFine(loan.fine);
         })
         .catch(error => 
         {
-          console.error('Error loading position data:', error);
+          console.error('Error loading loan data:', error);
         });
     }
   }, [loanId]);
@@ -39,6 +40,7 @@ function LoansEditingPage()
   const handleSubmit = (e) => 
   {
     e.preventDefault();
+
     const loanData = 
     {
       reader_id: readerId,
@@ -48,6 +50,7 @@ function LoansEditingPage()
       is_returned: loanIsReturned,
       fine: loanFine
     };
+
     const request = loanId
       ? axios.put(`http://localhost:3000/loans/${loanId}`, loanData)
       : axios.post('http://localhost:3000/loans', loanData);
@@ -55,17 +58,17 @@ function LoansEditingPage()
     request
       .then(() => 
       {
-        navigate('/loans');
+        navigate('/loans'); 
       })
       .catch(error => 
       {
-        console.error('Error saving position data:', error);
+        console.error('Error saving loan data:', error);
       });
   };
 
   return (
     <div>
-      <h1>{loanId ? 'Edit position' : 'Add new position'}</h1>
+      <h1>{loanId ? 'Edit Loan' : 'Add New Loan'}</h1>
       <form onSubmit={handleSubmit}>
         <div>
           <label>Reader ID:</label>
@@ -86,7 +89,7 @@ function LoansEditingPage()
           />
         </div>
         <div>
-          <label>Date of issue:</label>
+          <label>Date of Issue:</label>
           <input 
             type="date" 
             value={loanDate} 
@@ -95,7 +98,7 @@ function LoansEditingPage()
           />
         </div>
         <div>
-          <label>Return date:</label>
+          <label>Return Date:</label>
           <input 
             type="date" 
             value={returnDate} 
@@ -103,12 +106,15 @@ function LoansEditingPage()
           />
         </div>
         <div>
-          <label>Is Returned:</label>
-          <input 
-            type="number" 
-            value={loanIsReturned} 
-            onChange={(e) => setIsReturned(e.target.value)} 
-          />
+          <label>Status:</label>
+          <select 
+            className="authorgenre-select"
+            value={loanIsReturned ? '1' : '0'} 
+            onChange={(e) => setIsReturned(e.target.value === '1')}
+          >
+            <option value="1">Returned</option>
+            <option value="0">Not returned</option>
+          </select>
         </div>
         <div>
           <label>Fine:</label>
@@ -116,9 +122,10 @@ function LoansEditingPage()
             type="number" 
             value={loanFine} 
             onChange={(e) => setFine(e.target.value)} 
+            step="0.01" 
           />
         </div>
-        <button type="submit">{loanId ? 'Save changes' : 'Add position'}</button>
+        <button type="submit">{loanId ? 'Save Changes' : 'Add Loan'}</button>
       </form>
     </div>
   );
