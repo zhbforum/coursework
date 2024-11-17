@@ -19,8 +19,17 @@
     font-size: 1.2em;
     color: #f0f0f5;
     transition: color 0.3s ease;
+    display: flex; 
+    align-items: center; 
 }
-
+  
+.footer-logo-image 
+{
+    width: 35px; 
+    height: auto; 
+    margin-right: 10px; 
+}
+  
 .footer p 
 {
     margin: 0;

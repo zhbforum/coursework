@@ -17,7 +17,7 @@ const SelectField = ({ label, value, onChange, options, required = false }) =>
   return (
     <div>
       <label>{label}:</label>
-      <select value={value} onChange={onChange} required={required}>
+      <select value={value} onChange={onChange} required={required} className="authorgenre-select">
         <option value="" disabled>Select {label.toLowerCase()}</option>
         {options.map(option => 
         {
