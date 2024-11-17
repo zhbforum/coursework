@@ -5,13 +5,15 @@
 The project uses MySQL for the database, 
 Node.js for the backend logic. 
 Express.js for running an API that simplifies working with routes, requests and responses, a framework for node.js. 
-React library which is involved in the frontend part. Also the axios library for react, which performs http requests for api
+React library which is involved in the frontend part. Also the axios library for react, which performs http requests for api.
+JWT(Json Web Token) for auth and transfer data between client and server.
 
 
 <p align="center">
   <img src="rep_photos/90px-MySQL_logo.svg.png" alt="MySQL Logo" width="150" height="100"/>
   <img src="rep_photos/image_no_background.png" alt="Node.js Logo" width="150" height="100"/>
   <img src="rep_photos/image_react_no_background_v2.png" alt="Node.js Logo" width="150" height="100"/>
+  <img src="rep_photos/image_no_background (2).png" alt="Node.js Logo" width="150" height="100"/>
 </p>
 
 # Coursework Project Setup
@@ -81,6 +83,7 @@ After the server starts, verify that it’s running by checking the console outp
 
    ```bash
    npm install
+   npm install jwt-decode 
    ```
 
 3. Start the UI:
