@@ -4,7 +4,7 @@
 # This project was created for Course Work No. 1 for KhPI. 
 
 ![Node.js](https://img.shields.io/badge/Node.js-v20.16.0-green)
-![React](https://img.shields.io/badge/React-17.0.2-blue)
+![React](https://img.shields.io/badge/React-13.4.0-blue)
 
 
 ## Tech Stack
