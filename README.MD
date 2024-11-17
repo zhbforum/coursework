@@ -3,8 +3,12 @@
 
 # This project was created for Course Work No. 1 for KhPI. 
 
+![MySQL](https://img.shields.io/badge/MySQL-2.18.1-blue)
 ![Node.js](https://img.shields.io/badge/Node.js-v20.16.0-green)
-![React](https://img.shields.io/badge/React-18.3.1-blue)
+![Express](https://img.shields.io/badge/Express-4.21.1-yellow)
+![React](https://img.shields.io/badge/React-18.3.1-purple)
+![Axios](https://img.shields.io/badge/Axios-1.7.7-pink)
+![JWT](https://img.shields.io/badge/JWT-9.0.2-lightblue)
 
 
 ## Tech Stack
