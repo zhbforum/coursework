@@ -3,12 +3,22 @@
 
 # This project was created for Course Work No. 1 for KhPI. 
 
-The project uses MySQL for the database, 
-Node.js for the backend logic, 
-Express.js for running an API that simplifies working with routes, requests, and responses, a framework for Node.js, 
-React library for the frontend, 
-and the `axios` library for React, which performs HTTP requests for API. 
-JWT (Json Web Token) is used for authentication and transferring data between client and server.
+![Node.js](https://img.shields.io/badge/Node.js-v14.17.6-green)
+![React](https://img.shields.io/badge/React-17.0.2-blue)
+
+
+## Tech Stack
+
+| Technology       | Purpose                                          |
+|-------------------|--------------------------------------------------|
+| **MySQL**        | Database management                              |
+| **Node.js**      | Backend logic                                    |
+| **Express.js**   | API framework for Node.js                        |
+| **React**        | Frontend library                                 |
+| **Axios**        | HTTP client for API communication                |
+| **JWT**          | Authentication and secure data transmission      |
+
+---
 
 <p align="center">
   <img src="rep_photos/90px-MySQL_logo.svg.png" alt="MySQL Logo" width="150" height="100"/>
