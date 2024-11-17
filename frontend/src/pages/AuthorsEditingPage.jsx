@@ -27,10 +27,10 @@ function AuthorsEditingPage()
           console.error('Error loading author data:', error);
         });
     }
-  }, [authorId]);
+}, [authorId]);
 
   const handleSubmit = (e) => 
-    {
+  {
     e.preventDefault();
     const authorData = { name, bio };
 
@@ -42,20 +42,24 @@ function AuthorsEditingPage()
       .then(() => 
     {
         navigate('/authors');
-      })
+    })
       .catch(error => 
     {
         console.error('Error saving author data:', error);
-      });
+    });
   };
 
-  const handleDelete = () => {
-    if (window.confirm('Are you sure you want to delete this author?')) {
+  const handleDelete = () => 
+  {
+    if (window.confirm('Are you sure you want to delete this author?')) 
+    {
       axios.delete(`http://localhost:3000/authors/${authorId}`)
-        .then(() => {
+        .then(() => 
+        {
           navigate('/authors'); 
         })
-        .catch(error => {
+        .catch(error => 
+        {
           setError('Error deleting author');
           console.error('Error deleting author:', error);
         });
@@ -80,8 +84,7 @@ function AuthorsEditingPage()
           {authorId && (
               <button
                 className="delete-button"
-                onClick={handleDelete}
-              >
+                onClick={handleDelete}>
                 Delete book
               </button>
             )}

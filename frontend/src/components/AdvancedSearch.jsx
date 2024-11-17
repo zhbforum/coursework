@@ -1,32 +1,41 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
-function AdvancedSearch() {
+function AdvancedSearch() 
+{
   const [query, setQuery] = useState('');
   const [genreId, setGenreId] = useState('');
   const [results, setResults] = useState([]);
   const [genres, setGenres] = useState([]);
 
-  const handleSearch = async (e) => {
+  const handleSearch = async (e) => 
+  {
     e.preventDefault();
-    try {
+    try 
+    {
       const genreFilter = genreId || undefined;
-      const response = await axios.get('http://localhost:3000/books/search-with-filters', {
+      const response = await axios.get('http://localhost:3000/books/search-with-filters', 
+      {
         params: { query, genre: genreFilter },
       });
       setResults(response.data);
-    } catch (error) {
-      console.error('Ошибка при выполнении поиска:', error);
+    } 
+    catch (error) 
+    {
+      console.error('Error while performing search:', error);
     }
   };
 
-  useEffect(() => {
+  useEffect(() => 
+  {
     axios
       .get('http://localhost:3000/genres')
-      .then((response) => {
+      .then((response) => 
+      {
         setGenres(response.data);
       })
-      .catch((error) => {
+      .catch((error) => 
+      {
         console.error('Error while retrieving genre data:', error);
       });
   }, []);
@@ -43,7 +52,8 @@ function AdvancedSearch() {
         />
         <select value={genreId} onChange={(e) => setGenreId(e.target.value)}>
           <option value="">All genres</option>
-          {genres.map((genre) => (
+          {genres.map((genre) => 
+          (
             <option key={genre.id} value={genre.genre_name}>
               {genre.genre_name}
             </option>
@@ -55,7 +65,8 @@ function AdvancedSearch() {
       <div>
         <h3>Result of search:</h3>
         <div className="card-container">
-          {results.map((result) => (
+          {results.map((result) => 
+          (
             <div className="card" key={result.book_id}>
               <h4>{result.title}</h4>
               <p><strong>Author:</strong> {result.author_name}</p>

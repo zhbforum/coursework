@@ -8,15 +8,15 @@ function SearchBooks()
   const [results, setResults] = useState([]);
 
   const handleSearch = async (e) => 
-{
+  {
     e.preventDefault();
     try 
     {
       const response = await axios.get('http://localhost:3000/books/search', 
-    {
+      {
         params: { title, author },
-    });
-    setResults(response.data);
+      });
+      setResults(response.data);
     } 
     catch (error) 
     {
@@ -43,11 +43,14 @@ function SearchBooks()
         <button type="submit">Search</button>
       </form>
       <ul>
-        {results.map((book) => (
-          <li key={book.id}>
-            {book.title} — Author ID: {book.author_id}
-          </li>
-        ))}
+        {results.map((book) => 
+        {
+          return (
+            <li key={book.id}>
+              {book.title} — Author ID: {book.author_id}
+            </li>
+          );
+        })}
       </ul>
     </div>
   );
