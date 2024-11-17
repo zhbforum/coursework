@@ -13,7 +13,7 @@ function PaymentsEditingPage()
   const [error, setError] = useState(null); 
 
   useEffect(() => 
-    {
+  {
     if (paymentId) 
     {
       axios.get(`http://localhost:3000/payments/${paymentId}`)
@@ -32,7 +32,7 @@ function PaymentsEditingPage()
   }, [paymentId]);
 
   const handleSubmit = (e) => 
-    {
+  {
     e.preventDefault();
     const paymentData = { reader_id: readerId, amount, payment_date: paymentDate };
 
@@ -41,22 +41,27 @@ function PaymentsEditingPage()
       : axios.post('http://localhost:3000/payments', paymentData);
 
     request
-      .then(() => {
+      .then(() => 
+      {
         navigate('/payments');
       })
       .catch(error => 
-    {
+      {
         console.error('Error saving payment data:', error);
       });
   };
 
-  const handleDelete = () => {
-    if (window.confirm('Are you sure you want to delete this book?')) {
+  const handleDelete = () => 
+  {
+    if (window.confirm('Are you sure you want to delete this book?')) 
+    {
       axios.delete(`http://localhost:3000/payments/${paymentId}`)
-        .then(() => {
+        .then(() => 
+        {
           navigate('/payments'); 
         })
-        .catch(error => {
+        .catch(error => 
+        {
           setError('Error deleting payment');
           console.error('Error deleting payment:', error);
         });
@@ -69,20 +74,36 @@ function PaymentsEditingPage()
       {error && <p style={{ color: 'red' }}>{error}</p>}
       <form onSubmit={handleSubmit}>
         <div>
-          <label>Reader ID:</label>
-          <input type="number" value={readerId} onChange={(e) => setReaderId(e.target.value)} required />
+          <label>Reader:</label>
+          <input 
+            type="number" 
+            value={readerId} 
+            onChange={(e) => setReaderId(e.target.value)} 
+            required 
+          />
         </div>
         <div>
           <label>Amount:</label>
-          <input type="number" value={amount} onChange={(e) => setAmount(e.target.value)} required />
+          <input 
+            type="number" 
+            value={amount} 
+            onChange={(e) => setAmount(e.target.value)} 
+            required 
+          />
         </div>
         <div>
           <label>Payment date:</label>
-          <input type="date" value={paymentDate} onChange={(e) => setPaymentDate(e.target.value)} required />
+          <input 
+            type="date" 
+            value={paymentDate} 
+            onChange={(e) => setPaymentDate(e.target.value)} 
+            required 
+          />
         </div>
         <div className="button-group">
           <button type="submit">{paymentId ? 'Save changes' : 'Add payment'}</button>
-          {paymentId && (
+          {paymentId && 
+          (
             <button
               type="button"
               className="delete-button"

@@ -15,7 +15,7 @@ function LoansEditingPage()
   const [loanFine, setFine] = useState('');
 
   useEffect(() => 
-    {
+  {
     if (loanId) 
     {
       axios.get(`http://localhost:3000/loans/${loanId}`)
@@ -37,21 +37,28 @@ function LoansEditingPage()
   }, [loanId]);
 
   const handleSubmit = (e) => 
-    {
+  {
     e.preventDefault();
-    const loanData = { reader_id: readerId, book_id: bookId, loan_date: loanDate, return_date: returnDate, is_returned: loanIsReturned, fine: loanFine};
-
+    const loanData = 
+    {
+      reader_id: readerId,
+      book_id: bookId,
+      loan_date: loanDate,
+      return_date: returnDate,
+      is_returned: loanIsReturned,
+      fine: loanFine
+    };
     const request = loanId
       ? axios.put(`http://localhost:3000/loans/${loanId}`, loanData)
       : axios.post('http://localhost:3000/loans', loanData);
 
     request
       .then(() => 
-    {
+      {
         navigate('/loans');
       })
       .catch(error => 
-    {
+      {
         console.error('Error saving position data:', error);
       });
   };
@@ -62,27 +69,54 @@ function LoansEditingPage()
       <form onSubmit={handleSubmit}>
         <div>
           <label>Reader ID:</label>
-          <input type="number" value={readerId} onChange={(e) => setReaderId(e.target.value)} required />
+          <input 
+            type="number" 
+            value={readerId} 
+            onChange={(e) => setReaderId(e.target.value)} 
+            required 
+          />
         </div>
         <div>
           <label>Book ID:</label>
-          <input type="number" value={bookId} onChange={(e) => setBookId(e.target.value)} required />
+          <input 
+            type="number" 
+            value={bookId} 
+            onChange={(e) => setBookId(e.target.value)} 
+            required 
+          />
         </div>
         <div>
           <label>Date of issue:</label>
-          <input type="date" value={loanDate} onChange={(e) => setLoanDate(e.target.value)} required />
+          <input 
+            type="date" 
+            value={loanDate} 
+            onChange={(e) => setLoanDate(e.target.value)} 
+            required 
+          />
         </div>
         <div>
           <label>Return date:</label>
-          <input type="date" value={returnDate} onChange={(e) => setReturnDate(e.target.value)} />
+          <input 
+            type="date" 
+            value={returnDate} 
+            onChange={(e) => setReturnDate(e.target.value)} 
+          />
         </div>
         <div>
           <label>Is Returned:</label>
-          <input type="number" value={loanIsReturned} onChange={(e) => setIsReturned(e.target.value)} />
+          <input 
+            type="number" 
+            value={loanIsReturned} 
+            onChange={(e) => setIsReturned(e.target.value)} 
+          />
         </div>
         <div>
           <label>Fine:</label>
-          <input type="number" value={loanFine} onChange={(e) => setFine(e.target.value)} />
+          <input 
+            type="number" 
+            value={loanFine} 
+            onChange={(e) => setFine(e.target.value)} 
+          />
         </div>
         <button type="submit">{loanId ? 'Save changes' : 'Add position'}</button>
       </form>

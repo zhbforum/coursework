@@ -1,6 +1,6 @@
 import React from 'react';
 import { Navigate } from 'react-router-dom';
-import jwtDecode from 'jwt-decode';
+import { jwtDecode } from "jwt-decode";
 
 function ProtectedRoute({ children, allowedRole }) 
 {
@@ -8,20 +8,21 @@ function ProtectedRoute({ children, allowedRole })
 
     if (!token) 
     {
-        return <Navigate to="/" />;
+        return <Navigate to="/login" />;
     }
 
     try 
     {
-        const decoded = jwtDecode(token);
-
+        const decoded = jwtDecode(token); 
         if (decoded.role !== allowedRole) 
         {
             return <Navigate to="/" />;
         }
-    } catch (error) {
-        console.error('Ошибка токена:', error);
-        return <Navigate to="/" />;
+    } 
+    catch (error) 
+    {
+        console.error('Token error:', error);
+        return <Navigate to="/login" />;
     }
 
     return children;

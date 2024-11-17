@@ -76,11 +76,15 @@ const getAllLoans = (req, res) =>
     WHERE loans.is_returned = 0
   `;
 
-  db.query(sql, (err, results) => {
-    if (err) {
+  db.query(sql, (err, results) => 
+  {
+    if (err) 
+    {
       console.error('Error fetching loans with readers and books:', err.message);
       res.status(500).json({ error: 'Server error', details: err.message });
-    } else {
+    } 
+    else 
+    {
       res.json(results);
     }
   });

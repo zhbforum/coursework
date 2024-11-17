@@ -5,26 +5,26 @@ function AdminDashboard()
 {
   return (
     <div>
-      <h1>Административная панель</h1>
-      <p>Добро пожаловать в панель администратора!</p>
+      <h1>Admin panel</h1>
+      <p>Welcome to admin panel!</p>
       <ul>
         <li>
-          <Link to="/books/editing">Управление книгами</Link>
+          <Link to="/books/editing">Book management</Link>
         </li>
         <li>
-          <Link to="/authors/editing">Управление авторами</Link>
+          <Link to="/authors/editing">Author management</Link>
         </li>
         <li>
-          <Link to="/genres/editing">Управление жанрами</Link>
+          <Link to="/genres/editing">Genre management</Link>
         </li>
         <li>
-          <Link to="/readers/editing">Управление читателями</Link>
+          <Link to="/readers/editing">Reader managment</Link>
         </li>
         <li>
-          <Link to="/loans/editing">Управление займами</Link>
+          <Link to="/loans/editing">Loan managment</Link>
         </li>
         <li>
-          <Link to="/payments/editing">Управление платежами</Link>
+          <Link to="/payments/editing">Payment managment</Link>
         </li>
       </ul>
     </div>

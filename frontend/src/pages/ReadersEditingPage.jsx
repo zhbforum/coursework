@@ -13,7 +13,7 @@ function ReadersEditingPage()
   const [error, setError] = useState(null);
 
   useEffect(() => 
- {
+  {
     if (readerId) 
     {
       axios.get(`http://localhost:3000/readers/${readerId}`)
@@ -32,7 +32,7 @@ function ReadersEditingPage()
   }, [readerId]);
 
   const handleSubmit = (e) => 
-    {
+  {
     e.preventDefault();
     const readerData = { name, email, phone };
 
@@ -42,22 +42,26 @@ function ReadersEditingPage()
 
     request
       .then(() => 
-    {
+      {
         navigate('/readers');
       })
       .catch(error => 
-    {
+      {
         console.error('Error saving reader data:', error);
       });
   };
 
-  const handleDelete = () => {
-    if (window.confirm('Are you sure you want to delete this book?')) {
+  const handleDelete = () => 
+  {
+    if (window.confirm('Are you sure you want to delete this book?')) 
+    {
       axios.delete(`http://localhost:3000/readers/${readerId}`)
-        .then(() => {
+        .then(() => 
+        {
           navigate('/readers'); 
         })
-        .catch(error => {
+        .catch(error => 
+        {
           setError('Error deleting reader');
           console.error('Error deleting reader:', error);
         });
@@ -71,19 +75,35 @@ function ReadersEditingPage()
       <form onSubmit={handleSubmit}>
         <div>
           <label>Name:</label>
-          <input type="text" value={name} onChange={(e) => setName(e.target.value)} required />
+          <input 
+            type="text" 
+            value={name} 
+            onChange={(e) => setName(e.target.value)} 
+            required 
+          />
         </div>
         <div>
           <label>Email:</label>
-          <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} required />
+          <input 
+            type="email" 
+            value={email} 
+            onChange={(e) => setEmail(e.target.value)} 
+            required 
+          />
         </div>
         <div>
           <label>Telephone number:</label>
-          <input type="text" value={phone} onChange={(e) => setPhone(e.target.value)} required />
+          <input 
+            type="text" 
+            value={phone} 
+            onChange={(e) => setPhone(e.target.value)} 
+            required 
+          />
         </div>
         <div className="button-group">
           <button type="submit">{readerId ? 'Save changes' : 'Add reader'}</button>
-          {readerId && (
+          {readerId && 
+          (
             <button
               type="button"
               className="delete-button"

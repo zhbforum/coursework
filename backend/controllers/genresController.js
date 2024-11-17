@@ -63,7 +63,7 @@ const updateGenre = (req, res) =>
   const { genre_name } = req.body;
   const sql = 'UPDATE genres SET genre_name = ? WHERE id = ?';
   db.query(sql, [genre_name, genreId], (err, result) => 
-    {
+  {
     if (err) 
     {
       console.error('Request execution error:', err.message);
@@ -80,17 +80,24 @@ const updateGenre = (req, res) =>
   });
 };
 
-const deleteGenre = (req, res) => {
+const deleteGenre = (req, res) => 
+{
   const genreId = req.params.genreId; 
   const sql = 'DELETE FROM genres WHERE id = ?'; 
 
-  db.query(sql, [genreId], (err, result) => {
-    if (err) {
+  db.query(sql, [genreId], (err, result) => 
+  {
+    if (err) 
+    {
       console.error('Request execution error:', err.message);
       res.status(500).json({ error: 'Server error', details: err.message });
-    } else if (result.affectedRows === 0) {
+    } 
+    else if (result.affectedRows === 0) 
+    {
       res.status(404).json({ error: 'Genre not found' });
-    } else {
+    } 
+    else 
+    {
       res.json({ message: 'Genre successfully deleted' });
     }
   });

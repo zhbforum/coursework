@@ -3,24 +3,9 @@ import './HomePage.css';
 
 function HomePage() 
 {
-  const backgroundStyle = 
-{
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    width: '100%',
-    height: '100%',
-    backgroundImage: 'url("/startback.png")', 
-    backgroundRepeat: 'no-repeat',
-    backgroundPosition: 'center',
-    backgroundSize: 'cover',
-    filter: 'brightness(0.5)', 
-    zIndex: 0,
-};
-
   return (
     <div className="home-page">
-      <div style={backgroundStyle}></div>
+      <div className="background"></div>
       <div className="content">
         <h1>Welcome to the Library Management Portal</h1>
         <p>
@@ -29,6 +14,9 @@ function HomePage()
         </p>
         <p>Developer: [zhbforum, killursxlf etc]</p>
       </div>
+      <footer>
+        <p>© 2024 Library Management Portal</p>
+      </footer>
     </div>
   );
 }

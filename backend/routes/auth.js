@@ -14,13 +14,13 @@ router.post('/login', (req, res) =>
     {
         if (err) 
         {
-            console.error('Ошибка базы данных:', err.message);
-            return res.status(500).json({ message: 'Ошибка сервера' });
+            console.error('Database Error:', err.message);
+            return res.status(500).json({ message: 'Server error' });
         }
 
         if (results.length === 0 || results[0].password !== password) 
         {
-            return res.status(401).json({ message: 'Неверное имя пользователя или пароль' });
+            return res.status(401).json({ message: 'Invalid username or password' });
         }
 
         const user = results[0];

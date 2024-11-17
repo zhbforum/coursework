@@ -10,7 +10,7 @@ function GenresEditingPage()
   const [genreName, setGenreName] = useState('');
   const [error, setError] = useState(null); 
 
-  useEffect(() => 
+useEffect(() => 
 {
     if (genreId) 
     {
@@ -47,19 +47,22 @@ const handleSubmit = (e) =>
       });
   };
 
-  const handleDelete = () => 
-  {
-    if (window.confirm('Are you sure you want to delete this book?')) {
+const handleDelete = () => 
+{
+    if (window.confirm('Are you sure you want to delete this book?')) 
+    {
       axios.delete(`http://localhost:3000/genres/${genreId}`)
-        .then(() => {
+        .then(() => 
+        {
           navigate('/genres'); 
         })
-        .catch(error => {
+        .catch(error => 
+        {
           setError('Error deleting genre');
           console.error('Error deleting genre:', error);
         });
     }
-  };
+};
 
   return (
     <div>
