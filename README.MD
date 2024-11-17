@@ -3,7 +3,7 @@
 
 # This project was created for Course Work No. 1 for KhPI. 
 
-![Node.js](https://img.shields.io/badge/Node.js-v14.17.6-green)
+![Node.js](https://img.shields.io/badge/Node.js-v20.16.0-green)
 ![React](https://img.shields.io/badge/React-17.0.2-blue)
 
 
