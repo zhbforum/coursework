@@ -29,7 +29,7 @@
   <img src="rep_photos/90px-MySQL_logo.svg.png" alt="MySQL Logo" width="150" height="100"/>
   <img src="rep_photos/image_no_background.png" alt="Node.js Logo" width="150" height="100"/>
   <img src="rep_photos/image_react_no_background_v2.png" alt="React Logo" width="150" height="100"/>
-  <img src="rep_photos/image_no_background (2).png" alt="JWT Logo" width="130" height="100"/>
+  <img src="rep_photos/image_no_background (2).png" alt="JWT Logo"/>
 </p>
 
 # Coursework Project Setup
