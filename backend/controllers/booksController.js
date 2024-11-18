@@ -126,7 +126,7 @@ const searchWithFilters = (req, res) =>
 {
   const { query, genre } = req.query; 
   let sql = `
-    SELECT books.*, authors.name AS author_name, genres.genre_name
+    SELECT books.*, authors.name AS author_name, genres.genre_name, books.book_image_name AS book_image
     FROM books
     JOIN authors ON books.author_id = authors.id
     JOIN genres ON books.genre_id = genres.id
