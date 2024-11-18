@@ -40,6 +40,15 @@ function AdvancedSearch()
       });
   }, []);
 
+  const getImagePath = (book_image_name) => {
+    try {
+      return require(`../assets/${book_image_name}`);
+    } catch (err) {
+      console.error(`Image not found: ${book_image_name}`);
+      return ''; 
+    }
+  };
+
   return (
     <div>
       <h2>Advanced search</h2>
@@ -68,6 +77,11 @@ function AdvancedSearch()
           {results.map((result) => 
           (
             <div className="card" key={result.book_id}>
+            <img
+            src={getImagePath(result.book_image_name)}
+            alt={result.title}
+            style={{width: "100px", height: "150px"}}
+            />
               <h4>{result.title}</h4>
               <p><strong>Author:</strong> {result.author_name}</p>
               <p><strong>Genre:</strong> {result.genre_name}</p>
