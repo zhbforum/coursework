@@ -80,6 +80,7 @@ button
   padding: 8px 16px;
   border-radius: 4px;
   cursor: pointer;
+
 }
 
 button:hover 
@@ -299,4 +300,19 @@ textarea {
 .left-aligned label 
 {
   margin-right: 8px;
+}
+
+.buttons {
+  position: absolute;
+  right: 0; 
+  top: 50%; 
+  transform: translateY(-50%); 
+  padding: 8px 16px;
+}
+
+.loan-item 
+{
+  position: relative; 
+  margin-bottom: 15px;
+  padding-right: 120px;
 }

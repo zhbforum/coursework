@@ -22,15 +22,20 @@ function BooksPage()
   return (
     <div>
       <h1>List of books</h1>
+      <br></br>
       <ul>
         {books.map(book => 
           {
           return (
-            <li key={book.id}>
-              {book.title} - Available copies: {book.available_copies}
+            <li className="loan-item" key={book.id} style={{ marginBottom: '15px' }}>
+              <div>
+              <span className="bold-text">{book.title}</span>
+              <p>- Available copies: <span className="bold-text">{book.available_copies}</span></p> 
+              <p>- Total copies: <span className="bold-text">{book.total_copies}</span></p>
               <Link to={`/books/editing/${book.id}`}>
-                <button>Editing</button>
+                <button className='buttons'>Edit</button>
               </Link>
+              </div> 
             </li>
           );
           })}

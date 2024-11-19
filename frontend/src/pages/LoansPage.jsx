@@ -18,6 +18,7 @@ function LoansPage() {
   return (
     <div>
       <h1>List of loans</h1>
+      <br></br>
       {loans.length === 0 ? (
         <p>No loans found.</p>
       ) : (
@@ -26,17 +27,21 @@ function LoansPage() {
             const formattedDate = new Date(loan.loan_date).toLocaleDateString('en-GB'); 
 
             return (
-              <li key={loan.id} style={{ marginBottom: '10px' }}>
+              <li className = "loan-item" key={loan.id} style={{ marginBottom: '15px' }}>
                 <div>
-                  Reader: <span className="bold-text">{loan.reader_name}</span> - 
+                  Reader: <span className="bold-text">{loan.reader_name}</span>
+                </div>
+                <div>
                   Book: <span className="bold-text">{loan.book_title}</span>
                 </div>
                 <div>
-                  Date of Issue: <span className="bold-text">{formattedDate}</span> - 
+                  Date of Issue: <span className="bold-text">{formattedDate}</span>
+                </div>
+                <div>
                   Fine: <span className="bold-text">₴{loan.fine}</span>
                 </div>
                 <Link to={`/loans/editing/${loan.id}`}>
-                  <button>Edit</button>
+                  <button className={'buttons'}>Edit</button> 
                 </Link>
               </li>
             );

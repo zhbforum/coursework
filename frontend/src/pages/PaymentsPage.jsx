@@ -22,14 +22,17 @@ function PaymentsPage()
   return (
     <div>
       <h1>List of payments</h1>
+      <br></br>
       <ul>
         {payments.map(payment => 
         {
           return (
-            <li key={payment.id}>
+            <li className="loan-item" key={payment.id} style={{ marginBottom: '15px' }}>
+              <div>
               Reader <span className="bold-text">{payment.reader_name}</span> - Amount: <span className="bold-text">₴{payment.amount}</span>
+              </div>
               <Link to={`/payments/editing/${payment.id}`}>
-                <button>Edit</button>
+                <button className="buttons">Edit</button>
               </Link>
             </li>
           );

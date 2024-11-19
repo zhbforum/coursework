@@ -2,53 +2,94 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useParams, useNavigate } from 'react-router-dom';
 
-function LoansEditingPage() 
-{
-  const { loanId } = useParams(); // ID займа из URL
+const SelectField = ({ label, value, onChange, options, required = false }) => {
+  return (
+    <div>
+      <label>{label}:</label>
+      <select 
+        value={value} 
+        onChange={onChange} 
+        required={required} 
+        className="authorgenre-select"
+      >
+        <option value="" disabled>Select {label.toLowerCase()}</option>
+        {options.map(option => (
+          <option key={option.id} value={option.id}>
+            {option.name || option.title}
+          </option>
+        ))}
+      </select>
+    </div>
+  );
+};
+
+function LoansEditingPage() {
+  const { loanId } = useParams(); 
   const navigate = useNavigate();
 
-  // Состояния для хранения полей формы
   const [readerId, setReaderId] = useState('');
   const [bookId, setBookId] = useState('');
   const [loanDate, setLoanDate] = useState('');
   const [returnDate, setReturnDate] = useState('');
-  const [loanIsReturned, setIsReturned] = useState(false); // Булевое значение
+  const [loanIsReturned, setIsReturned] = useState(false); 
   const [loanFine, setFine] = useState('');
+  const [readers, setReaders] = useState([]);
+  const [books, setBooks] = useState([]);
+  const [error, setError] = useState(null);
 
-  useEffect(() => 
-  {
-    if (loanId) // Если ID существует, загружаем данные
-    {
-      axios.get(`http://localhost:3000/loans/${loanId}`)
-        .then(response => 
-        {
+  useEffect(() => {
+    const fetchLoan = async () => {
+      if (loanId) {
+        try {
+          const response = await axios.get(`http://localhost:3000/loans/${loanId}`);
           const loan = response.data;
           setReaderId(loan.reader_id);
           setBookId(loan.book_id);
-          setLoanDate(loan.loan_date ? loan.loan_date.split('T')[0] : ''); // Форматируем дату
+          setLoanDate(loan.loan_date ? loan.loan_date.split('T')[0] : '');
           setReturnDate(loan.return_date ? loan.return_date.split('T')[0] : '');
           setIsReturned(loan.is_returned);
           setFine(loan.fine);
-        })
-        .catch(error => 
-        {
+        } catch (error) {
           console.error('Error loading loan data:', error);
-        });
-    }
+        }
+      }
+    };
+
+    const fetchReaders = async () => {
+      try {
+        const response = await axios.get('http://localhost:3000/readers');
+        setReaders(response.data);
+      } catch (error) {
+        setError('Error loading readers');
+        console.error(error);
+      }
+    };
+
+    const fetchBooks = async () => {
+      try {
+        const response = await axios.get('http://localhost:3000/books');
+        setBooks(response.data);
+      } catch (error) {
+        setError('Error loading books');
+        console.error(error);
+      }
+    };
+
+    fetchLoan();
+    fetchReaders();
+    fetchBooks();
   }, [loanId]);
 
-  const handleSubmit = (e) => 
-  {
+  const handleSubmit = (e) => {
     e.preventDefault();
 
-    const loanData = 
-    {
+    const loanData = {
       reader_id: readerId,
       book_id: bookId,
       loan_date: loanDate,
       return_date: returnDate,
       is_returned: loanIsReturned,
-      fine: loanFine
+      fine: loanFine,
     };
 
     const request = loanId
@@ -56,38 +97,34 @@ function LoansEditingPage()
       : axios.post('http://localhost:3000/loans', loanData);
 
     request
-      .then(() => 
-      {
+      .then(() => {
         navigate('/loans'); 
       })
-      .catch(error => 
-      {
-        console.error('Error saving loan data:', error);
+      .catch(error => {
+        setError('Error saving loan data');
+        console.error(error);
       });
   };
 
   return (
     <div>
       <h1>{loanId ? 'Edit Loan' : 'Add New Loan'}</h1>
+      {error && <p style={{ color: 'red' }}>{error}</p>}
       <form onSubmit={handleSubmit}>
-        <div>
-          <label>Reader ID:</label>
-          <input 
-            type="number" 
-            value={readerId} 
-            onChange={(e) => setReaderId(e.target.value)} 
-            required 
-          />
-        </div>
-        <div>
-          <label>Book ID:</label>
-          <input 
-            type="number" 
-            value={bookId} 
-            onChange={(e) => setBookId(e.target.value)} 
-            required 
-          />
-        </div>
+        <SelectField
+          label="Reader"
+          value={readerId}
+          onChange={(e) => setReaderId(e.target.value)}
+          options={readers}
+          required
+        />
+        <SelectField
+          label="Book"
+          value={bookId}
+          onChange={(e) => setBookId(e.target.value)}
+          options={books}
+          required
+        />
         <div>
           <label>Date of Issue:</label>
           <input 

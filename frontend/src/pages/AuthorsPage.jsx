@@ -22,13 +22,16 @@ function AuthorsPage()
   return (
     <div>
       <h1>List of authors</h1>
+      <br></br>
       <ul>
         {authors.map(author => 
         (
-          <li key={author.id}>
-            {author.name}
+          <li className="loan-item" key={author.id} style={{ marginBottom: '15px' }}>
+            <div>
+            <span className="bold-text">{author.name}</span>
+            </div>
             <Link to={`/authors/editing/${author.id}`}>
-              <button>Editing</button>
+              <button className={'buttons'}>Edit</button>
             </Link>
           </li>
         ))}
