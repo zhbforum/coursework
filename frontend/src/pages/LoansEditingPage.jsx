@@ -24,60 +24,51 @@ const SelectField = ({ label, value, onChange, options, required = false }) => {
 };
 
 function LoansEditingPage() {
-  const { loanId } = useParams(); 
+  const { loanId } = useParams();
   const navigate = useNavigate();
 
+  // Состояния для хранения полей формы
   const [readerId, setReaderId] = useState('');
   const [bookId, setBookId] = useState('');
   const [loanDate, setLoanDate] = useState('');
   const [returnDate, setReturnDate] = useState('');
-  const [loanIsReturned, setIsReturned] = useState(false); 
+  const [loanIsReturned, setIsReturned] = useState(false);
   const [loanFine, setFine] = useState('');
   const [readers, setReaders] = useState([]);
   const [books, setBooks] = useState([]);
+  const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    const fetchLoan = async () => {
-      if (loanId) {
-        try {
-          const response = await axios.get(`http://localhost:3000/loans/${loanId}`);
-          const loan = response.data;
+    const loadData = async () => 
+      {
+      try {
+        const [readersData, booksData] = await Promise.all([
+          axios.get('http://localhost:3000/readers'),
+          axios.get('http://localhost:3000/books'),
+        ]);
+        setReaders(readersData.data);
+        setBooks(booksData.data);
+
+        if (loanId) {
+          const loanResponse = await axios.get(`http://localhost:3000/loans/${loanId}`);
+          const loan = loanResponse.data;
           setReaderId(loan.reader_id);
           setBookId(loan.book_id);
           setLoanDate(loan.loan_date ? loan.loan_date.split('T')[0] : '');
           setReturnDate(loan.return_date ? loan.return_date.split('T')[0] : '');
           setIsReturned(loan.is_returned);
           setFine(loan.fine);
-        } catch (error) {
-          console.error('Error loading loan data:', error);
         }
-      }
-    };
-
-    const fetchReaders = async () => {
-      try {
-        const response = await axios.get('http://localhost:3000/readers');
-        setReaders(response.data);
       } catch (error) {
-        setError('Error loading readers');
+        setError('Error loading data. Please try again later.');
         console.error(error);
+      } finally {
+        setLoading(false);
       }
     };
 
-    const fetchBooks = async () => {
-      try {
-        const response = await axios.get('http://localhost:3000/books');
-        setBooks(response.data);
-      } catch (error) {
-        setError('Error loading books');
-        console.error(error);
-      }
-    };
-
-    fetchLoan();
-    fetchReaders();
-    fetchBooks();
+    loadData();
   }, [loanId]);
 
   const handleSubmit = (e) => {
@@ -98,13 +89,16 @@ function LoansEditingPage() {
 
     request
       .then(() => {
-        navigate('/loans'); 
+        navigate('/loans');
       })
-      .catch(error => {
-        setError('Error saving loan data');
+      .catch((error) => {
+        setError('Error saving loan data. Please try again later.');
         console.error(error);
       });
   };
+
+  if (loading) return <p>Loading...</p>;
+  
 
   return (
     <div>
@@ -127,26 +121,26 @@ function LoansEditingPage() {
         />
         <div>
           <label>Date of Issue:</label>
-          <input 
-            type="date" 
-            value={loanDate} 
-            onChange={(e) => setLoanDate(e.target.value)} 
-            required 
+          <input
+            type="date"
+            value={loanDate}
+            onChange={(e) => setLoanDate(e.target.value)}
+            required
           />
         </div>
         <div>
           <label>Return Date:</label>
-          <input 
-            type="date" 
-            value={returnDate} 
-            onChange={(e) => setReturnDate(e.target.value)} 
+          <input
+            type="date"
+            value={returnDate}
+            onChange={(e) => setReturnDate(e.target.value)}
           />
         </div>
         <div>
           <label>Status:</label>
-          <select 
+          <select
             className="authorgenre-select"
-            value={loanIsReturned ? '1' : '0'} 
+            value={loanIsReturned ? '1' : '0'}
             onChange={(e) => setIsReturned(e.target.value === '1')}
           >
             <option value="1">Returned</option>
@@ -155,11 +149,11 @@ function LoansEditingPage() {
         </div>
         <div>
           <label>Fine:</label>
-          <input 
-            type="number" 
-            value={loanFine} 
-            onChange={(e) => setFine(e.target.value)} 
-            step="0.01" 
+          <input
+            type="number"
+            value={loanFine}
+            onChange={(e) => setFine(e.target.value)}
+            step="0.01"
           />
         </div>
         <button type="submit">{loanId ? 'Save Changes' : 'Add Loan'}</button>
@@ -169,3 +163,4 @@ function LoansEditingPage() {
 }
 
 export default LoansEditingPage;
+
