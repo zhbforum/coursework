@@ -22,14 +22,18 @@ function ReadersPage()
   return (
     <div>
       <h1>List of readers</h1>
+      <br></br>
       <ul>
         {readers.map(reader => 
         {
           return (
-            <li key={reader.id}>
-              {reader.name} - Email: {reader.email} - Телефон: {reader.phone}
+            <li className="loan-item" key={reader.id} style={{ marginBottom: '15px' }}>
+              <div>
+              <span className="bold-text">{reader.name}</span> <p>- Email: <span className="bold-text">{reader.email}</span></p> 
+              <p>- Телефон: <span className="bold-text">{reader.phone}</span></p>
+              </div>
               <Link to={`/readers/editing/${reader.id}`}>
-                <button>Edit</button>
+                <button className="buttons">Edit</button>
               </Link>
             </li>
           );

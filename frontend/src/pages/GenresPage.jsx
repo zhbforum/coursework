@@ -25,14 +25,18 @@ return (
     <ul>
       {genres.map(genre => 
       (
-        <li key={genre.id}>
-          {genre.genre_name}
+        <li className="loan-item" key={genre.id}>
+          <div>
+          <br></br>
+          <span className="bold-text">{genre.genre_name}</span>
+          </div>
           <Link to={`/genres/editing/${genre.id}`}>
-            <button>Edit</button>
+            <button className={'buttons'}>Edit</button>
           </Link>
         </li>
       ))}
     </ul>
+    <br></br>
     <Link to="/genres/editing">
       <button>Add a new genre</button>
     </Link>
