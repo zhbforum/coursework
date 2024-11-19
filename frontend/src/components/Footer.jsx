@@ -1,7 +1,8 @@
 import React from 'react';
 import './Footer.css';
 
-function Footer() {
+function Footer() 
+{
   return (
     <footer className="footer">
       <div className="footer-logo">

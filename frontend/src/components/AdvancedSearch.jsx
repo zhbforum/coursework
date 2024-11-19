@@ -41,9 +41,12 @@ function AdvancedSearch()
   }, []);
 
   const getImagePath = (book_image_name) => {
-    try {
+    try 
+    {
       return require(`../assets/${book_image_name}`);
-    } catch (err) {
+    } 
+    catch (err) 
+    {
       console.error(`Image not found: ${book_image_name}`);
       return ''; 
     }
