@@ -5,10 +5,10 @@ const secretKey = 'your_secret_key';
 
 async function login(req, res) 
 {
-    const { username, password } = req.body;
-    const sql = 'SELECT * FROM users WHERE username = ? AND password = SHA2(?, 256)';
+    const { name, password } = req.body;
+    const sql = 'SELECT * FROM users WHERE name = ? AND password = SHA2(?, 256)';
     
-    db.query(sql, [username, password], (err, results) => 
+    db.query(sql, [name, password], (err, results) => 
     {
         if (err) return res.status(500).json({ error: 'Database error' });
 

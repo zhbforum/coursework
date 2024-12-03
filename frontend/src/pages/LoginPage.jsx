@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 
 function LoginPage() 
 {
-    const [username, setUsername] = useState('');
+    const [name, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
     const navigate = useNavigate();
@@ -14,7 +14,7 @@ function LoginPage()
         e.preventDefault();
         try 
         {
-            const response = await axios.post('http://localhost:3000/auth/login', { username, password });
+            const response = await axios.post('http://localhost:3000/auth/login', { name, password });
             localStorage.setItem('token', response.data.token);
             navigate('/admin'); 
             console.log(localStorage.getItem('token'));
@@ -32,7 +32,7 @@ function LoginPage()
                 <input
                     type="text"
                     placeholder="Username"
-                    value={username}
+                    value={name}
                     onChange={(e) => setUsername(e.target.value)}
                 />
                 <input

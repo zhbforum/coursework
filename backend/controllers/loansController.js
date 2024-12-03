@@ -69,7 +69,7 @@ const getAllLoans = (req, res) =>
 {
 
   const sql = `
-    SELECT loans.id, loans.loan_date, loans.reader_id, readers.name AS reader_name, loans.book_id, books.title AS book_title, loans.fine
+    SELECT loans.id, loans.loan_date, loans.reader_id, readers.name AS reader_name, loans.book_id, books.title AS book_title, loans.fine, loans.is_returned
     FROM loans
     JOIN readers ON loans.reader_id = readers.id
     JOIN books ON loans.book_id = books.id

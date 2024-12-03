@@ -27,7 +27,6 @@ function LoansEditingPage() {
   const { loanId } = useParams();
   const navigate = useNavigate();
 
-  // Состояния для хранения полей формы
   const [readerId, setReaderId] = useState('');
   const [bookId, setBookId] = useState('');
   const [loanDate, setLoanDate] = useState('');
@@ -78,7 +77,7 @@ function LoansEditingPage() {
       reader_id: readerId,
       book_id: bookId,
       loan_date: loanDate,
-      return_date: returnDate,
+      return_date: returnDate || null,
       is_returned: loanIsReturned,
       fine: loanFine,
     };

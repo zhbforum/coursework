@@ -7,10 +7,10 @@ const SECRET_KEY = 'your_secret_key';
 
 router.post('/login', (req, res) => 
 {
-    const { username, password } = req.body;
+    const { name, password } = req.body;
 
-    const sql = 'SELECT * FROM users WHERE username = ?';
-    db.query(sql, [username], (err, results) => 
+    const sql = 'SELECT * FROM users WHERE name = ?';
+    db.query(sql, [name], (err, results) => 
     {
         if (err) 
         {
@@ -24,7 +24,7 @@ router.post('/login', (req, res) =>
         }
 
         const user = results[0];
-        const token = jwt.sign({ username: user.username, role: user.role }, SECRET_KEY);
+        const token = jwt.sign({ name: user.name, role: user.role }, SECRET_KEY);
         res.json({ token });
     });
 });

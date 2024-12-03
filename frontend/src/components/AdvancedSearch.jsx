@@ -1,41 +1,33 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
-function AdvancedSearch() 
-{
+function AdvancedSearch() {
   const [query, setQuery] = useState('');
   const [genreId, setGenreId] = useState('');
   const [results, setResults] = useState([]);
   const [genres, setGenres] = useState([]);
 
-  const handleSearch = async (e) => 
-  {
+  const handleSearch = async (e) => {
     e.preventDefault();
-    try 
-    {
+    try {
       const genreFilter = genreId || undefined;
-      const response = await axios.get('http://localhost:3000/books/search-with-filters', 
-      {
+      const response = await axios.get('http://localhost:3000/books/search-with-filters', {
         params: { query, genre: genreFilter },
       });
-      setResults(response.data);
-    } 
-    catch (error) 
-    {
+      const filteredResults = response.data.filter(book => book.available_copies > 0);
+      setResults(filteredResults);
+    } catch (error) {
       console.error('Error while performing search:', error);
     }
   };
 
-  useEffect(() => 
-  {
+  useEffect(() => {
     axios
       .get('http://localhost:3000/genres')
-      .then((response) => 
-      {
+      .then((response) => {
         setGenres(response.data);
       })
-      .catch((error) => 
-      {
+      .catch((error) => {
         console.error('Error while retrieving genre data:', error);
       });
   }, []);
@@ -45,7 +37,7 @@ function AdvancedSearch()
       return require(`../assets/${book_image_name}`);
     } catch (err) {
       console.error(`Image not found: ${book_image_name}`);
-      return ''; 
+      return '';
     }
   };
 
@@ -61,8 +53,7 @@ function AdvancedSearch()
         />
         <select className="genre-select" value={genreId} onChange={(e) => setGenreId(e.target.value)}>
           <option value="">All genres</option>
-          {genres.map((genre) => 
-          (
+          {genres.map((genre) => (
             <option key={genre.id} value={genre.genre_name}>
               {genre.genre_name}
             </option>
@@ -74,19 +65,23 @@ function AdvancedSearch()
       <div>
         <h3>Result of search:</h3>
         <div className="card-container">
-          {results.map((result) => 
-          (
-            <div className="card" key={result.book_id}>
-            <img
-            src={getImagePath(result.book_image_name)}
-            alt={result.title}
-            style={{width: "100px", height: "150px"}}
-            />
-              <h4>{result.title}</h4>
-              <p><strong>Author:</strong> {result.author_name}</p>
-              <p><strong>Genre:</strong> {result.genre_name}</p>
-            </div>
-          ))}
+          {results.length > 0 ? (
+            results.map((result) => (
+              <div className="card" key={result.book_id}>
+                <img
+                  src={getImagePath(result.book_image_name)}
+                  alt={result.title}
+                  style={{ width: '100px', height: '150px' }}
+                />
+                <h4>{result.title}</h4>
+                <p><strong>Author:</strong> {result.author_name}</p>
+                <p><strong>Genre:</strong> {result.genre_name}</p>
+                <p><strong>Available Copies:</strong> {result.available_copies}</p>
+              </div>
+            ))
+          ) : (
+            <p>No books available with the selected filters.</p>
+          )}
         </div>
       </div>
     </div>

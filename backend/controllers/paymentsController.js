@@ -44,9 +44,9 @@ const getPaymentById = (req, res) =>
 
 const addPayment = (req, res) => 
 {
-  const { reader_id, amount, payment_date } = req.body;
-  const sql = 'INSERT INTO payments (reader_id, amount, payment_date) VALUES (?, ?, ?)';
-  db.query(sql, [reader_id, amount, payment_date], (err, result) => 
+  const { reader_id, amount, payment_date, loan_id } = req.body;
+  const sql = 'INSERT INTO payments (reader_id, amount, payment_date, loan_id) VALUES (?, ?, ?, ?)';
+  db.query(sql, [reader_id, amount, payment_date, loan_id], (err, result) => 
   {
     if (err) 
     {
@@ -63,9 +63,9 @@ const addPayment = (req, res) =>
 const updatePayment = (req, res) => 
 {
   const paymentId = req.params.paymentId;
-  const { reader_id, amount, payment_date } = req.body;
-  const sql = 'UPDATE payments SET reader_id = ?, amount = ?, payment_date = ? WHERE id = ?';
-  db.query(sql, [reader_id, amount, payment_date, paymentId], (err, result) => 
+  const { reader_id, amount, payment_date, loan_id } = req.body;
+  const sql = 'UPDATE payments SET reader_id = ?, amount = ?, payment_date = ?, loan_id = ? WHERE id = ?';
+  db.query(sql, [reader_id, amount, payment_date, loan_id, paymentId], (err, result) => 
   {
     if (err) 
     {

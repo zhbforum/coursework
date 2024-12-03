@@ -16,10 +16,10 @@ import PaymentsEditingPage from './pages/PaymentsEditingPage';
 import GenresEditingPage from './pages/GenresEditingPage';
 import HomePage from './pages/HomePage';
 import SearchBooks from './pages/SearchBooksPage';
-import AdvancedSearch from './components/AdvancedSearch'; 
+import AdvancedSearch from './components/AdvancedSearch';
 import ProtectedRoute from './ProtectedRoute';
 import AdminDashboard from './pages/AdminDashboard';
-import LoginPage from './pages/LoginPage'; 
+import LoginPage from './pages/LoginPage';
 
 import './App.css';
 
@@ -31,13 +31,9 @@ function App() {
         <main className="container">
           <Routes>
             <Route path="/" element={<HomePage />} />
-            
             <Route path="/login" element={<LoginPage />} />
-            
             <Route path="/books" element={<BooksPage />} />
             <Route path="/books/search" element={<SearchBooks />} />
-
-            {/* Защищенные маршруты для редактирования */}
             <Route path="/books/editing" element={
               <ProtectedRoute allowedRole="admin">
                 <BooksEditingPage />
@@ -48,8 +44,11 @@ function App() {
                 <BooksEditingPage />
               </ProtectedRoute>
             } />
-
-            <Route path="/readers" element={<ReadersPage />} />
+            <Route path="/readers" element={
+              <ProtectedRoute allowedRole="admin">
+                <ReadersPage />
+              </ProtectedRoute>
+            } />
             <Route path="/readers/editing" element={
               <ProtectedRoute allowedRole="admin">
                 <ReadersEditingPage />
@@ -60,8 +59,11 @@ function App() {
                 <ReadersEditingPage />
               </ProtectedRoute>
             } />
-
-            <Route path="/loans" element={<LoansPage />} />
+            <Route path="/loans" element={
+              <ProtectedRoute allowedRole="admin">
+                <LoansPage />
+              </ProtectedRoute>
+            } />
             <Route path="/loans/editing" element={
               <ProtectedRoute allowedRole="admin">
                 <LoansEditingPage />
@@ -72,7 +74,21 @@ function App() {
                 <LoansEditingPage />
               </ProtectedRoute>
             } />
-
+            <Route path="/payments" element={
+              <ProtectedRoute allowedRole="admin">
+                <PaymentsPage />
+              </ProtectedRoute>
+            } />
+            <Route path="/payments/editing" element={
+              <ProtectedRoute allowedRole="admin">
+                <PaymentsEditingPage />
+              </ProtectedRoute>
+            } />
+            <Route path="/payments/editing/:paymentId" element={
+              <ProtectedRoute allowedRole="admin">
+                <PaymentsEditingPage />
+              </ProtectedRoute>
+            } />
             <Route path="/authors" element={<AuthorsPage />} />
             <Route path="/authors/editing" element={
               <ProtectedRoute allowedRole="admin">
@@ -84,19 +100,6 @@ function App() {
                 <AuthorsEditingPage />
               </ProtectedRoute>
             } />
-
-            <Route path="/payments" element={<PaymentsPage />} />
-            <Route path="/payments/editing" element={
-              <ProtectedRoute allowedRole="admin">
-                <PaymentsEditingPage />
-              </ProtectedRoute>
-            } />
-            <Route path="/payments/editing/:paymentId" element={
-              <ProtectedRoute allowedRole="admin">
-                <PaymentsEditingPage />
-              </ProtectedRoute>
-            } />
-
             <Route path="/genres" element={<GenresPage />} />
             <Route path="/genres/editing" element={
               <ProtectedRoute allowedRole="admin">
