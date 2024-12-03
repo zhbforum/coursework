@@ -96,9 +96,6 @@ function LoansEditingPage() {
       });
   };
 
-  if (loading) return <p>Loading...</p>;
-  
-
   return (
     <div>
       <h1>{loanId ? 'Edit Loan' : 'Add New Loan'}</h1>
