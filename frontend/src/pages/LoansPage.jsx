@@ -29,16 +29,19 @@ function LoansPage() {
             return (
               <li className = "loan-item" key={loan.id} style={{ marginBottom: '15px' }}>
                 <div>
-                  Reader: <span className="bold-text">{loan.reader_name}</span>
+                  Loan ID: <span className="bold-text">{loan.id}</span>
                 </div>
                 <div>
-                  Book: <span className="bold-text">{loan.book_title}</span>
+                  - Reader: <span className="bold-text">{loan.reader_name}</span>
                 </div>
                 <div>
-                  Date of Issue: <span className="bold-text">{formattedDate}</span>
+                  - Book: <span className="bold-text">{loan.book_title}</span>
                 </div>
                 <div>
-                  Fine: <span className="bold-text">₴{loan.fine}</span>
+                  - Date of Issue: <span className="bold-text">{formattedDate}</span>
+                </div>
+                <div>
+                  - Fine: <span className="bold-text">{loan.fine} ₴</span>
                 </div>
                 <Link to={`/loans/editing/${loan.id}`}>
                   <button className={'buttons'}>Edit</button> 

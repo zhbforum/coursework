@@ -26,7 +26,7 @@ function AuthorsPage()
       <ul>
         {authors.map(author => 
         (
-          <li className="loan-item" key={author.id} style={{ marginBottom: '15px' }}>
+          <li className="loan-item" key={author.id}>
             <div>
             <span className="bold-text">{author.name}</span>
             </div>

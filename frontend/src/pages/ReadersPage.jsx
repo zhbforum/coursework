@@ -38,9 +38,10 @@ function ReadersPage() {
         {readers.map(reader => (
           <li className="loan-item" key={reader.id} style={{ marginBottom: '15px' }}>
             <div>
-              <span className="bold-text">{reader.name}</span> <p>- Email: <span className="bold-text">{reader.email}</span></p>
-              <p>- Телефон: <span className="bold-text">{reader.phone}</span></p>
-              <p>- Total Loans: <span className="bold-text">{getTotalLoans(reader.id)} UAH</span></p>
+              <span className="bold-text">{reader.name}</span> 
+              <p>- Email: <span className="bold-text">{reader.email}</span></p>
+              <p>- Phone: <span className="bold-text">{reader.phone}</span></p>
+              <p>- Total Loans: <span className="bold-text">{getTotalLoans(reader.id)} ₴</span></p>
             </div>
             <Link to={`/readers/editing/${reader.id}`}>
               <button className="buttons">Edit</button>

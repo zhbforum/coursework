@@ -3,7 +3,7 @@ const db = require('../config/db');
 const getAllPayments = (req, res) => 
   {
     const sql = `
-      SELECT payments.id, payments.reader_id, payments.amount, readers.name AS reader_name
+      SELECT payments.id, payments.reader_id, payments.amount, payments.payment_date, payments.loan_id, readers.name AS reader_name
       FROM payments
       JOIN readers ON payments.reader_id = readers.id
     `;
