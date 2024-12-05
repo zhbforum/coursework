@@ -6,6 +6,8 @@ function AdvancedSearch() {
   const [genreId, setGenreId] = useState('');
   const [results, setResults] = useState([]);
   const [genres, setGenres] = useState([]);
+  const [selectedAuthor, setSelectedAuthor] = useState(null);
+  const [authorBio, setAuthorBio] = useState(null);
 
   const handleSearch = async (e) => {
     e.preventDefault();
@@ -14,7 +16,7 @@ function AdvancedSearch() {
       const response = await axios.get('http://localhost:3000/books/search-with-filters', {
         params: { query, genre: genreFilter },
       });
-      const filteredResults = response.data.filter(book => book.available_copies > 0);
+      const filteredResults = response.data.filter((book) => book.available_copies > 0);
       setResults(filteredResults);
     } catch (error) {
       console.error('Error while performing search:', error);
@@ -33,15 +35,34 @@ function AdvancedSearch() {
   }, []);
 
   const getImagePath = (book_image_name) => {
-    try 
-    {
+    try {
       return require(`../assets/${book_image_name}`);
-    } 
-    catch (err) 
-    {
+    } catch (err) {
       console.error(`Image not found: ${book_image_name}`);
       return '';
     }
+  };
+
+  const handleAuthorClick = async (authorName) => {
+    try {
+      const response = await axios.get('http://localhost:3000/authors');
+      console.log('Full API Response:', response.data);
+      const author = response.data.find((a) => a.name === authorName);
+      if (author) {
+        setSelectedAuthor(authorName);
+        setAuthorBio(author.bio);
+      } else {
+        console.error('Author not found in response.');
+      }
+    } catch (error) {
+      console.error('Error while retrieving author bio:', error);
+    }
+  };
+  
+
+  const closeAuthorBio = () => {
+    setSelectedAuthor(null);
+    setAuthorBio(null);
   };
 
   return (
@@ -70,14 +91,23 @@ function AdvancedSearch() {
         <div className="card-container">
           {results.length > 0 ? (
             results.map((result) => (
-              <div className="card" key={result.book_id}>
+              <div className="card" key={result.id}>
                 <img
                   src={getImagePath(result.book_image_name)}
                   alt={result.title}
                   style={{ width: '100px', height: '150px' }}
                 />
                 <h4>{result.title}</h4>
-                <p><strong>Author:</strong> {result.author_name}</p>
+                <p>
+                  <strong>Author:</strong>{' '}
+                  <span
+                    className="clickable-author"
+                    onClick={() => handleAuthorClick(result.author_name)}
+                    style={{ color: 'blue', cursor: 'pointer' }}
+                  >
+                    {result.author_name}
+                  </span>
+                </p>
                 <p><strong>Genre:</strong> {result.genre_name}</p>
                 <p><strong>Available Copies:</strong> {result.available_copies}</p>
               </div>
@@ -87,6 +117,16 @@ function AdvancedSearch() {
           )}
         </div>
       </div>
+
+      {selectedAuthor && authorBio && (
+        <div className="author-bio-container">
+          <div className="author-bio-content">
+            <h3>{selectedAuthor}</h3>
+            <p>{authorBio}</p>
+            <button onClick={closeAuthorBio}>Close</button>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

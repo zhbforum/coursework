@@ -258,18 +258,18 @@ textarea {
 
 .authorgenre-select 
 {
-    width: 100%; 
-    max-width: 760px; 
-    padding: 8px; 
-    font-size: 1em; 
-    border: 2px solid #ccc; 
-    border-radius: 4px; 
-    background-color: #f9f9f9; 
-    color: #333; 
-    appearance: none; 
-    outline: none; 
-    cursor: pointer; 
-    transition: all 0.3s ease; 
+  width: 100%; 
+  max-width: 760px; 
+  padding: 8px; 
+  font-size: 1em; 
+  border: 2px solid #ccc; 
+  border-radius: 4px; 
+  background-color: #f9f9f9; 
+  color: #333; 
+  appearance: none; 
+  outline: none; 
+  cursor: pointer; 
+  transition: all 0.3s ease; 
 }
 
 .authorgenre-select:hover 
@@ -315,4 +315,55 @@ textarea {
   position: relative; 
   margin-bottom: 15px;
   padding-right: 120px;
+}
+
+.clickable-author {
+  color: blue;
+  cursor: pointer;
+}
+
+.clickable-author:hover {
+  text-decoration: underline;
+}
+
+.author-bio-container {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%); 
+  width: 400px; 
+  background-color: #f9f9f9; 
+  border: 1px solid #ccc; 
+  border-radius: 10px; 
+  padding: 20px; 
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
+  z-index: 1000; 
+}
+
+.author-bio-content {
+  text-align: center;
+}
+
+.author-bio-content h3 {
+  margin-top: 0; 
+}
+
+.author-bio-content p {
+  font-size: 16px;
+  color: #333;
+}
+
+
+.author-bio-content button {
+  margin-top: 10px;
+  padding: 8px 16px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.author-bio-content button:hover {
+  background-color: #0056b3;
 }
