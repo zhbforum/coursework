@@ -35,7 +35,6 @@ function LoansEditingPage() {
   const [loanFine, setFine] = useState('');
   const [readers, setReaders] = useState([]);
   const [books, setBooks] = useState([]);
-  const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
   useEffect(() => {
@@ -59,12 +58,11 @@ function LoansEditingPage() {
           setIsReturned(loan.is_returned);
           setFine(loan.fine);
         }
-      } catch (error) {
+      } 
+      catch (error) {
         setError('Error loading data. Please try again later.');
         console.error(error);
-      } finally {
-        setLoading(false);
-      }
+      } 
     };
 
     loadData();
