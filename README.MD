@@ -15,7 +15,6 @@
 ## Tech Stack
 
 | Technology       | Purpose                                          |
-|------------------              |--------------------------------------------------|
 | **MySQL**        | Database management                              |
 | **Node.js**      | Backend logic                                    |
 | **Express.js**   | API framework for Node.js                        |
